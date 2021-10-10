@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DB.mdf" />
+    <None Remove="DB_log.ldf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WXZ8SX_HFT_2021221.Models\WXZ8SX_HFT_2021221.Models.csproj" />
   </ItemGroup>
 
