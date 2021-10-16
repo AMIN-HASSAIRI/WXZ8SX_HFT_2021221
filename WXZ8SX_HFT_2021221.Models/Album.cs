@@ -29,13 +29,13 @@ namespace WXZ8SX_HFT_2021221.Models
         public double Length { get; set; }
 
         [NotMapped]
-        public Artists Artist { get; set; }
+        public Artist Artist { get; set; }
 
         [ForeignKey(nameof(Artist))]
         public int ArtistId { get; set; }
 
         [NotMapped]
-        public Genres Genre { get; set; }
+        public Genre Genre { get; set; }
 
         [ForeignKey(nameof(Genre))]
         public int GenreId { get; set; }
