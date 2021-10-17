@@ -25,6 +25,12 @@ namespace WXZ8SX_HFT_2021221.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
+
+            modelBuilder.Entity<Artist>().HasData(
+                new Artist 
+                { 
+                    ArtistId = 0, ArtistName = "", DateOfBirth = DateTime.Parse("00/00/0000"), NumberOfAlbums = 0
+                });
         }
     }
 }
