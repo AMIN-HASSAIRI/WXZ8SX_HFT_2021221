@@ -36,6 +36,17 @@ namespace WXZ8SX_HFT_2021221.Logic
             return _songRepository.GetAll().ToList();
         }
 
+        public string GetWriterNameOfSong(int songId)
+        {
+            string writerName = _songRepository.GetOne(songId).Writer;
+
+            if (writerName == null)
+            {
+                throw new Exception("Invalid Song ID!");
+            }
+            return writerName;
+        }
+
         public void RemoveSong(int songId)
         {
             Song song = _songRepository.GetOne(songId);
