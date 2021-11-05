@@ -72,6 +72,21 @@ namespace WXZ8SX_HFT_2021221.Logic
             return orderedArtists;
         }
 
+        public List<Artist> GetArtistsOrderedByNumOfAlbums()
+        {
+            List<Artist> allArtists = _artistRepository.GetAll().ToList();
+
+            List<Artist> orderedArtists = new List<Artist>();
+
+            var artists = allArtists.OrderBy(artist => artist.NumberOfAlbums);
+
+            foreach (Artist artist in artists)
+            {
+                orderedArtists.Add(artist);
+            }
+            return orderedArtists;
+        }
+
         public void RemoveArtist(int artistId)
         {
             Artist artist = _artistRepository.GetOne(artistId);
