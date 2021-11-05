@@ -28,6 +28,18 @@ namespace WXZ8SX_HFT_2021221.Logic
             _songRepository.Add(newSong);
         }
 
+        public string GetAlbumNameOfSong(int songId)
+        {
+            Song song = _songRepository.GetOne(songId);
+            if (song == null)
+            {
+                throw new Exception($"There is no such song ID: {songId}!");
+            }
+            string albumName = _songRepository.GetAll().FirstOrDefault(song => song.SongId == songId).Album.AlbumName;
+
+            return albumName;
+        }
+
         public DateTime GetDateOfBirthOfSinger(int songId)
         {
             Song song = _songRepository.GetOne(songId);
