@@ -12,6 +12,11 @@ namespace WXZ8SX_HFT_2021221.Logic
     {
         private readonly IGenreRepository _genreRepository;
 
+        public Genre GetGenre(int genreId)
+        {
+            return _genreRepository.GetOne(genreId);
+        }
+
         public List<Genre> GetGenres()
         {
             return _genreRepository.GetAll().ToList();
