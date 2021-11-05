@@ -56,6 +56,13 @@ namespace WXZ8SX_HFT_2021221.Logic
             return longestSong;
         }
 
+        public Song GetShortestSong()
+        {
+            Song shortestSong = _songRepository.GetAll().OrderBy(song => song.Length).First();
+
+            return shortestSong;
+        }
+
         public Song GetSong(int songId)
         {
             return _songRepository.GetOne(songId);
