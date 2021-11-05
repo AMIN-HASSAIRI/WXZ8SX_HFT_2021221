@@ -38,6 +38,17 @@ namespace WXZ8SX_HFT_2021221.Logic
             return album.AlbumName;
         }
 
+        public List<Album> GetAlbumsOfArtist(int artistId)
+        {
+            Artist artist = _artistRepository.GetOne(artistId);
+            if (artist == null)
+            {
+                throw new Exception($"This artist ID: {artistId} does not exists!");
+            }
+            List<Album> artistAlbums = _albumRepository.GetAll().Where(album => album.ArtistId == artist.ArtistId).ToList();
+            return artistAlbums;
+        }
+
         public Artist GetArtist(int artistId)
         {
             Artist artist = _artistRepository.GetOne(artistId);
