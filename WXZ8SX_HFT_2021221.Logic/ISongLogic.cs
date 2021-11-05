@@ -25,6 +25,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         List<Song> GetSongsOrderedByName();
 
+        Song GetLongestSong();
 
     }
 }
