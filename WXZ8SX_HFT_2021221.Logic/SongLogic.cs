@@ -35,5 +35,19 @@ namespace WXZ8SX_HFT_2021221.Logic
         {
             return _songRepository.GetAll().ToList();
         }
+
+        public void RemoveSong(int songId)
+        {
+            Song song = _songRepository.GetOne(songId);
+
+            if (song == null)
+            {
+                throw new Exception("Invalid Song ID!");
+            }
+            else
+            {
+                _songRepository.Delete(song);
+            }
+        }
     }
 }
