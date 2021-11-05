@@ -21,5 +21,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         DateTime GetDateOfBirthOfSinger(int songId);
 
+        List<Song> GetSongsOrderedByLength();
+
     }
 }
