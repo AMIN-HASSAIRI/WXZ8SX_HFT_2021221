@@ -109,6 +109,15 @@ namespace WXZ8SX_HFT_2021221.Logic
             return OldestAlbum;
         }
 
+        public Album GetTheShortestAlbum()
+        {
+            List<Album> allAlbums = _albumRepository.GetAll().ToList();
+
+            Album shortestAlbum = allAlbums.OrderByDescending(album => album.Length).SingleOrDefault();
+
+            return shortestAlbum;
+        }
+
         public void RemoveAlbum(int albumId)
         {
             Album album = _albumRepository.GetOne(albumId);
