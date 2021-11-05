@@ -31,5 +31,15 @@ namespace WXZ8SX_HFT_2021221.Logic
         {
             return _genreRepository.GetAll().ToList();
         }
+
+        public void RemoveGenre(int genreId)
+        {
+            Genre genre = _genreRepository.GetOne(genreId);
+            if (genre == null)
+            {
+                throw new Exception("Genre does not exist!");
+            }
+            _genreRepository.Delete(genre);
+        }
     }
 }
