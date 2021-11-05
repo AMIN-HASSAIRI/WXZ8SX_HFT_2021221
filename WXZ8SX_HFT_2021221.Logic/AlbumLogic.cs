@@ -46,6 +46,22 @@ namespace WXZ8SX_HFT_2021221.Logic
             return _albumRepository.GetAll().ToList();
         }
 
+        public List<Album> GetBestAlbums()
+        {
+            List<Album> allAlbums = _albumRepository.GetAll().ToList();
+
+            List<Album> bestAlbums = new List<Album>();
+
+            var albums = allAlbums.OrderByDescending(album => album.Rating).GroupBy(album => album.Rating).First();
+
+            foreach (Album album in albums)
+            {
+                bestAlbums.Add(album);
+            }
+
+            return bestAlbums;
+        }
+
         public Album GetTheNewestAlbum()
         {
             List<Album> allAlbums = _albumRepository.GetAll().ToList();
