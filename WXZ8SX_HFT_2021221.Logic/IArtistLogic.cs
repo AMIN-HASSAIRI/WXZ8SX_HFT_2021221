@@ -14,5 +14,8 @@ namespace WXZ8SX_HFT_2021221.Logic
         Artist GetArtist(int artistId);
 
         void CreateArtist(int artistId, string artistName, DateTime dateOfBirth, int numAlbums);
+
+        void RemoveArtist(int artistId);
+
     }
 }
