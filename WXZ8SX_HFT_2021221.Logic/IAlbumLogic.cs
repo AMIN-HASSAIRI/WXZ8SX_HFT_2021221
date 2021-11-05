@@ -18,5 +18,8 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void RemoveAlbum(int albumId);
 
+        Album GetTheOldestAlbum();
+
+
     }
 }
