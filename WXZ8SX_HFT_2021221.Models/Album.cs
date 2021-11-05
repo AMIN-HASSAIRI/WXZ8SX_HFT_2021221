@@ -19,7 +19,7 @@ namespace WXZ8SX_HFT_2021221.Models
         public string AlbumName { get; set; }
 
         [Required]
-        public DateTime ReleasedDate { get; set; }
+        public DateTime? ReleasedDate { get; set; }
 
         [Required]
         public int NumberOfSongs { get; set; }
