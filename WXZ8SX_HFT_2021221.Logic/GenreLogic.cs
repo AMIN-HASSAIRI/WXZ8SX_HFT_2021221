@@ -12,6 +12,16 @@ namespace WXZ8SX_HFT_2021221.Logic
     {
         private readonly IGenreRepository _genreRepository;
 
+        public void CreateGenre(int genreId, string genreName)
+        {
+            Genre newGenre = new Genre
+            {
+                GenreId = genreId,
+                GenreName = genreName
+            };
+            _genreRepository.Add(newGenre);
+        }
+
         public Genre GetGenre(int genreId)
         {
             return _genreRepository.GetOne(genreId);
