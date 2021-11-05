@@ -46,6 +46,27 @@ namespace WXZ8SX_HFT_2021221.Logic
             return _albumRepository.GetAll().ToList();
         }
 
+        public List<Album> GetAlbumsByArtist(int artistId)
+        {
+            List<Album> allAlbums = _albumRepository.GetAll().ToList();
+
+            List<Album> albumsByArtist = new List<Album>();
+
+            var albums = allAlbums.Where(album => album.ArtistId == artistId);
+
+            if (albums == null)
+            {
+                throw new Exception($"This artist ID {artistId} has no albums!");
+            }
+
+            foreach (Album album in albums)
+            {
+                albumsByArtist.Add(album);
+            }
+
+            return albumsByArtist;
+        }
+
         public List<Album> GetAlbumsByYear(string YYYY)
         {
             List<Album> allAlbums = _albumRepository.GetAll().ToList();
