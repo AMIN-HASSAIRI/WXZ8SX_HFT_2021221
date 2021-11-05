@@ -19,5 +19,8 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         List<Artist> GetArtistsOrderedByName();
 
+        List<Artist> GetArtistsOrderedByBirthDate();
+
+
     }
 }
