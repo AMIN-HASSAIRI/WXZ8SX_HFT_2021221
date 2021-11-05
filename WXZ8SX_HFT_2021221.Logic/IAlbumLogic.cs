@@ -22,6 +22,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         Album GetTheNewestAlbum();
 
+        List<Album> GetBestAlbums();
 
 
     }
