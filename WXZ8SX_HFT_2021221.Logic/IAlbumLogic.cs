@@ -30,5 +30,8 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         Album GetTheShortestAlbum();
 
+        List<Album> GetAlbumsByArtist(int artistId);
+
+
     }
 }

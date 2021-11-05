@@ -113,7 +113,7 @@ namespace WXZ8SX_HFT_2021221.Logic
         {
             List<Album> allAlbums = _albumRepository.GetAll().ToList();
 
-            Album shortestAlbum = allAlbums.OrderByDescending(album => album.Length).SingleOrDefault();
+            Album shortestAlbum = allAlbums.OrderByDescending(album => album.Length).FirstOrDefault();
 
             return shortestAlbum;
         }
