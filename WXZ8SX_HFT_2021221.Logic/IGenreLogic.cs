@@ -17,5 +17,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void RemoveGenre(int genreId);
 
+        List<Album> GetAllAlbumsWithGenre(int genreId);
+
     }
 }
