@@ -11,6 +11,8 @@ namespace WXZ8SX_HFT_2021221.Logic
     public class ArtistLogic : IArtistLogic
     {
         private readonly IArtistRepository _artistRepository;
+        private readonly IAlbumRepository _albumRepository;
+
 
         public void CreateArtist(int artistId, string artistName, DateTime dateOfBirth, int numAlbums)
         {
@@ -22,6 +24,18 @@ namespace WXZ8SX_HFT_2021221.Logic
                 NumberOfAlbums = numAlbums
             };
             _artistRepository.Add(newArtist);
+        }
+
+        public string GetAlbumNameByArtistId(int artistId)
+        {
+            Artist artist = _artistRepository.GetOne(artistId);
+            if (artist == null)
+            {
+                throw new Exception($"There is no artist ID: {artistId}");
+            }
+            List<Album> allAlbums = _albumRepository.GetAll().ToList();
+            Album album = allAlbums.Where(album => album.AlbumId == artist.ArtistId).SingleOrDefault();
+            return album.AlbumName;
         }
 
         public Artist GetArtist(int artistId)
