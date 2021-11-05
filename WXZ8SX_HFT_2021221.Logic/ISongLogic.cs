@@ -15,6 +15,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void CreateSong(int songId, string songName, double songLength, string writer, string singer, int albumId);
 
+        void RemoveSong(int songId);
 
     }
 }
