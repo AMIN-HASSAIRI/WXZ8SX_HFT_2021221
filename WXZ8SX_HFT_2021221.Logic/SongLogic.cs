@@ -72,6 +72,19 @@ namespace WXZ8SX_HFT_2021221.Logic
             return orderedSongs;
         }
 
+        public List<Song> GetSongsOrderedByName()
+        {
+            List<Song> orderedSongs = new List<Song>();
+
+            var songs = _songRepository.GetAll().OrderBy(song => song.Name);
+
+            foreach (Song song in songs)
+            {
+                orderedSongs.Add(song);
+            }
+            return orderedSongs;
+        }
+
         public string GetWriterNameOfSong(int songId)
         {
             string writerName = _songRepository.GetOne(songId).Writer;
