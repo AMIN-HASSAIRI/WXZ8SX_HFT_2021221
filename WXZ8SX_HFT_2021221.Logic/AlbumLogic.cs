@@ -45,5 +45,16 @@ namespace WXZ8SX_HFT_2021221.Logic
         {
             return _albumRepository.GetAll().ToList();
         }
+
+        public void RemoveAlbum(int albumId)
+        {
+            Album album = _albumRepository.GetOne(albumId);
+
+            if (album == null)
+            {
+                throw new Exception("Album does not exist!");
+            }
+            _albumRepository.Delete(album);
+        }
     }
 }
