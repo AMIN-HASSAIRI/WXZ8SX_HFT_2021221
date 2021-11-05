@@ -49,6 +49,13 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
         }
 
+        public Song GetLongestSong()
+        {
+            Song longestSong = _songRepository.GetAll().OrderBy(song => song.Length).Last();
+
+            return longestSong;
+        }
+
         public Song GetSong(int songId)
         {
             return _songRepository.GetOne(songId);
