@@ -12,6 +12,19 @@ namespace WXZ8SX_HFT_2021221.Logic
     {
         private readonly IAlbumRepository _albumRepository;
 
+        public Album GetAlbum(int id)
+        {
+            Album album = _albumRepository.GetOne(id);
+            if (album == null)
+            {
+                throw new Exception("Album does not exist!");
+            }
+            else
+            {
+                return album;
+            }
+        }
+
         public List<Album> GetAlbums()
         {
             return _albumRepository.GetAll().ToList();
