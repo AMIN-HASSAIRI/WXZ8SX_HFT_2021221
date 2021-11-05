@@ -11,6 +11,8 @@ namespace WXZ8SX_HFT_2021221.Logic
     public class GenreLogic : IGenreLogic
     {
         private readonly IGenreRepository _genreRepository;
+        private readonly IAlbumRepository _albumRepository;
+
 
         public void CreateGenre(int genreId, string genreName)
         {
@@ -20,6 +22,18 @@ namespace WXZ8SX_HFT_2021221.Logic
                 GenreName = genreName
             };
             _genreRepository.Add(newGenre);
+        }
+
+        public List<Album> GetAllAlbumsWithGenre(int genreId)
+        {
+            Genre genre = _genreRepository.GetOne(genreId);
+            if (genre == null)
+            {
+                throw new Exception($"Invalid genre ID: {genreId}");
+            }
+            List<Album> allAlbums = _albumRepository.GetAll().ToList();
+
+            return allAlbums.Where(album => album.GenreId == genre.GenreId).ToList();
         }
 
         public Genre GetGenre(int genreId)
