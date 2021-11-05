@@ -12,6 +12,18 @@ namespace WXZ8SX_HFT_2021221.Logic
     {
         private readonly IArtistRepository _artistRepository;
 
+        public void CreateArtist(int artistId, string artistName, DateTime dateOfBirth, int numAlbums)
+        {
+            Artist newArtist = new Artist
+            {
+                ArtistId = artistId,
+                ArtistName = artistName,
+                DateOfBirth = dateOfBirth,
+                NumberOfAlbums = numAlbums
+            };
+            _artistRepository.Add(newArtist);
+        }
+
         public Artist GetArtist(int artistId)
         {
             Artist artist = _artistRepository.GetOne(artistId);
