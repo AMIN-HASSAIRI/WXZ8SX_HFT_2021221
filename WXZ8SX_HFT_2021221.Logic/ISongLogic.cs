@@ -17,5 +17,8 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void RemoveSong(int songId);
 
+        string GetWriterNameOfSong(int songId);
+
+
     }
 }
