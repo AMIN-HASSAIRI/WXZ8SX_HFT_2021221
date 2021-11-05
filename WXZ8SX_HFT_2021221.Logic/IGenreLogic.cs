@@ -15,5 +15,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void CreateGenre(int genreId, string genreName);
 
+        void RemoveGenre(int genreId);
+
     }
 }
