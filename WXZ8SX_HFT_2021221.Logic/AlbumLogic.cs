@@ -82,6 +82,15 @@ namespace WXZ8SX_HFT_2021221.Logic
             return bestAlbums;
         }
 
+        public Album GetTheLongestAlbum()
+        {
+            List<Album> allAlbums = _albumRepository.GetAll().ToList();
+
+            Album longestAlbum = allAlbums.OrderBy(album => album.Length).FirstOrDefault();
+
+            return longestAlbum;
+        }
+
         public Album GetTheNewestAlbum()
         {
             List<Album> allAlbums = _albumRepository.GetAll().ToList();
