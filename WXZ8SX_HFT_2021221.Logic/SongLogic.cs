@@ -12,6 +12,11 @@ namespace WXZ8SX_HFT_2021221.Logic
     {
         protected readonly ISongRepository _songRepository;
 
+        public Song GetSong(int songId)
+        {
+            return _songRepository.GetOne(songId);
+        }
+
         public List<Song> GetSongs()
         {
             return _songRepository.GetAll().ToList();
