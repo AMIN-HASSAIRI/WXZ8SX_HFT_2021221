@@ -15,6 +15,10 @@ namespace WXZ8SX_HFT_2021221.Data
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Song> Songs { get; set; }
 
+        public MusicDbContext(DbContextOptions<MusicDbContext> options) : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
