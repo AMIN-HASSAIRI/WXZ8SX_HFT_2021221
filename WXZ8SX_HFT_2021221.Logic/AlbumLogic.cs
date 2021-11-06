@@ -12,6 +12,11 @@ namespace WXZ8SX_HFT_2021221.Logic
     {
         private readonly IAlbumRepository _albumRepository;
 
+        public AlbumLogic(IAlbumRepository albumRepository)
+        {
+            _albumRepository = albumRepository;
+        }
+
         public void CreateAlbum(int albumId, string albumName, DateTime releasedDate, int numberOfSongs, double rating, double length, int artistId, int genreId)
         {
             Album newAlbum = new Album
@@ -48,11 +53,9 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public List<Album> GetAlbumsByArtist(int artistId)
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
             List<Album> albumsByArtist = new List<Album>();
 
-            var albums = allAlbums.Where(album => album.ArtistId == artistId);
+            var albums = _albumRepository.GetAll().Where(album => album.ArtistId == artistId);
 
             if (albums == null)
             {
@@ -89,11 +92,9 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public List<Album> GetBestAlbums()
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
             List<Album> bestAlbums = new List<Album>();
 
-            var albums = allAlbums.OrderByDescending(album => album.Rating).GroupBy(album => album.Rating).First();
+            var albums = _albumRepository.GetAll().OrderByDescending(album => album.Rating).GroupBy(album => album.Rating).First();
 
             foreach (Album album in albums)
             {
@@ -105,36 +106,28 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public Album GetTheLongestAlbum()
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
-            Album longestAlbum = allAlbums.OrderBy(album => album.Length).FirstOrDefault();
+            Album longestAlbum = _albumRepository.GetAll().OrderByDescending(album => album.Length).FirstOrDefault();
 
             return longestAlbum;
         }
 
         public Album GetTheNewestAlbum()
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
-            Album NewestAlbum = allAlbums.OrderByDescending(album => album.ReleasedDate).FirstOrDefault();
+            Album NewestAlbum = _albumRepository.GetAll().OrderByDescending(album => album.ReleasedDate).FirstOrDefault();
 
             return NewestAlbum;
         }
 
         public Album GetTheOldestAlbum()
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
-            Album OldestAlbum = allAlbums.OrderBy(album => album.ReleasedDate).FirstOrDefault();
+            Album OldestAlbum = _albumRepository.GetAll().OrderBy(album => album.ReleasedDate).FirstOrDefault();
 
             return OldestAlbum;
         }
 
         public Album GetTheShortestAlbum()
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
-            Album shortestAlbum = allAlbums.OrderByDescending(album => album.Length).FirstOrDefault();
+            Album shortestAlbum = _albumRepository.GetAll().OrderBy(album => album.Length).FirstOrDefault();
 
             return shortestAlbum;
         }
