@@ -32,5 +32,15 @@ namespace WXZ8SX_HFT_2021221.Test
                 );
             Context.SaveChanges();
         }
+        [TearDown]
+        public void TearDown()
+        {
+            Context.Albums.RemoveRange(Context.Albums.ToArray());
+            Context.Genres.RemoveRange(Context.Genres.ToArray());
+            Context.Artists.RemoveRange(Context.Artists.ToArray());
+            Context.Songs.RemoveRange(Context.Songs.ToArray());
+
+            Context.SaveChanges();
+        }
     }
 }
