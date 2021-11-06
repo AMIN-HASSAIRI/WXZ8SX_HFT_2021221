@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WXZ8SX_HFT_2021221.Data;
 using WXZ8SX_HFT_2021221.Models;
+using WXZ8SX_HFT_2021221.Repository;
 
 namespace WXZ8SX_HFT_2021221.Test
 {
@@ -26,11 +27,27 @@ namespace WXZ8SX_HFT_2021221.Test
             Context = new MusicDbContext(contextBuilder.Options);
 
             Context.Albums.AddRange(
-                new Album { AlbumId = 100, AlbumName = "Test1", ReleasedDate = DateTime.Parse("09/15/2020"), NumberOfSongs = 11, Rating = 4.8, Length = 66.30 },
-                new Album { AlbumId = 101, AlbumName = "Test2", ReleasedDate = DateTime.Parse("12/08/2018"), NumberOfSongs = 13, Rating = 4.9, Length = 55.30 },
-                new Album { AlbumId = 102, AlbumName = "Test3", ReleasedDate = DateTime.Parse("05/29/2021"), NumberOfSongs = 9, Rating = 4.2, Length = 44.30 }
+                new Album { AlbumName = "Test1", ReleasedDate = DateTime.Parse("09/15/2020"), NumberOfSongs = 11, Rating = 4.8, Length = 66.30 },
+                new Album { AlbumName = "Test2", ReleasedDate = DateTime.Parse("12/08/2018"), NumberOfSongs = 13, Rating = 4.9, Length = 55.30 },
+                new Album { AlbumName = "Test3", ReleasedDate = DateTime.Parse("05/29/2021"), NumberOfSongs = 9, Rating = 4.2, Length = 44.30 }
                 );
             Context.SaveChanges();
+        }
+        [Test]
+        public void GetOne_InvalidId_Test()
+        {
+            //ARRANGE
+
+
+            IAlbumRepository repository = new AlbumRepository(Context);
+
+            //ACT
+
+            Album album = repository.GetOne(9999);
+
+            //ASSERT
+
+            Assert.Null(album);
         }
         [TearDown]
         public void TearDown()
