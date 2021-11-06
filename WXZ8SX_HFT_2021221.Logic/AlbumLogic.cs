@@ -76,17 +76,19 @@ namespace WXZ8SX_HFT_2021221.Logic
 
             List<Album> albumsByYear = new List<Album>();
 
-            var albums = allAlbums.Where(album => album.ReleasedDate.Value.ToString().Split("/")[2] == YYYY);
+            var albums = _albumRepository.GetAll().Where(album => album.ReleasedDate.Year == int.Parse(YYYY)).ToList();
 
             if (albums == null)
             {
-                throw new Exception($"There is no album in this year {YYYY}");
+                throw new Exception();// $"There is no album in this year {YYYY}");
             }
-            foreach (Album album in albums)
+            else
             {
-                albumsByYear.Add(album);
+                foreach (Album album in albums)
+                {
+                    albumsByYear.Add(album);
+                }
             }
-
             return albumsByYear;
         }
 

@@ -33,5 +33,24 @@ namespace WXZ8SX_HFT_2021221.Test
 
             Assert.That(() => logic.GetAlbumsByYear("2000"), Throws.Nothing);
         }
+        [Test]
+        public void GetAlbumsByYear_Empty_Test()
+        {
+            Mock<IAlbumRepository> albumRepoMock = new Mock<IAlbumRepository>();
+
+            albumRepoMock.Setup(mock => mock.GetOne(2))
+                .Returns(new Album
+                {
+                    AlbumId = 2,
+                    AlbumName = "Test2",
+                    ReleasedDate = DateTime.Parse("05/22/2011"),
+                    NumberOfSongs = 20,
+                    Rating = 4.3,
+
+                });
+            IAlbumLogic logic = new AlbumLogic(albumRepoMock.Object);
+
+            Assert.That(() => logic.GetAlbumsByYear("2024"), Is.Empty);
+        }
     }
 }
