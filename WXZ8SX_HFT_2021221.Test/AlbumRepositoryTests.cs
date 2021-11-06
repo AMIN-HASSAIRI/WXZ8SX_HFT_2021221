@@ -49,6 +49,20 @@ namespace WXZ8SX_HFT_2021221.Test
 
             Assert.Null(album);
         }
+        [Test]
+        public void GetAll_Test()
+        {
+            //ARRANGE
+
+            IAlbumRepository repository = new AlbumRepository(Context);
+
+            //ACT
+            List<Album> albums = repository.GetAll().ToList();
+
+            //ASSERT
+            Assert.NotNull(albums);
+            Assert.True(albums.Count > 0);
+        }
         [TearDown]
         public void TearDown()
         {
