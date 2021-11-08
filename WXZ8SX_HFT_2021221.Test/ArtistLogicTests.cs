@@ -50,6 +50,12 @@ namespace WXZ8SX_HFT_2021221.Test
             Assert.That(this.ArtistLogic.GetArtists(), Is.Not.Null);
         }
         [Test]
+        public void GetArtistsOrderedByBirthDate_Positive_Test()
+        {
+            var order = this.ArtistLogic.GetArtistsOrderedByBirthDate();
+            Assert.That(order.ElementAt(0).DateOfBirth, Is.LessThan(order.ElementAt(1).DateOfBirth));
+        }
+        [Test]
         public void GetArtist_Negative_Test()
         {
             Assert.Throws(typeof(Exception), () => this.ArtistLogic.GetArtist(6));
