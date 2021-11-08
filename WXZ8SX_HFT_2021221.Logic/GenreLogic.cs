@@ -21,12 +21,19 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public void CreateGenre(int genreId, string genreName)
         {
-            Genre newGenre = new Genre
+            if (_genreRepository.GetOne(genreId) == null)
             {
-                GenreId = genreId,
-                GenreName = genreName
-            };
-            _genreRepository.Add(newGenre);
+                Genre newGenre = new Genre
+                {
+                    GenreId = genreId,
+                    GenreName = genreName
+                };
+                _genreRepository.Add(newGenre);
+            }
+            else
+            {
+                throw new Exception($"this genre Id {genreId} is already exists!");
+            }
         }
 
         public List<Album> GetAllAlbumsWithGenre(int genreId)

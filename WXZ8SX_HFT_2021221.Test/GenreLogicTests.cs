@@ -46,7 +46,11 @@ namespace WXZ8SX_HFT_2021221.Test
         {
             Assert.That(() => this.GenreLogic.RemoveGenre(1), Throws.Nothing);
         }
-
+        [Test]
+        public void CreateGenre_Negative_Test()
+        {
+            Assert.Throws(typeof(Exception), () => this.GenreLogic.CreateGenre(1, "Test5"));
+        }
 
         private IQueryable<Album> FakeAlbumObjects()
         {
