@@ -122,11 +122,14 @@ namespace WXZ8SX_HFT_2021221.Logic
         {
             Artist artist = _artistRepository.GetOne(artistId);
 
-            if (artist == null)
+            if (_artistRepository.GetOne(artistId) == null)
             {
                 throw new Exception("This artist ID does not exists!");
             }
-            _artistRepository.Delete(artist);
+            else
+            {
+                _artistRepository.Delete(artist);
+            }
         }
     }
 }

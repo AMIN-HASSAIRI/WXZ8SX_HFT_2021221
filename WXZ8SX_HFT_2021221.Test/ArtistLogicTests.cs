@@ -60,7 +60,11 @@ namespace WXZ8SX_HFT_2021221.Test
         {
             Assert.Throws(typeof(Exception), () => this.ArtistLogic.GetArtist(6));
         }
-
+        [Test]
+        public void RemoveArtist_Negative_Test()
+        {
+            Assert.That(() => this.ArtistLogic.RemoveArtist(6), Throws.Nothing);
+        }
 
         private IQueryable<Album> FakeAlbumObjects()
         {
