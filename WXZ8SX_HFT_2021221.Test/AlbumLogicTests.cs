@@ -90,7 +90,11 @@ namespace WXZ8SX_HFT_2021221.Test
         {
             Assert.Throws(typeof(Exception) , () => this.AlbumLogic.GetAlbumsByYear("2024"));
         }
-
+        [Test]
+        public void CreateAlbum_Negative_Test()
+        {
+             Assert.Throws(typeof(Exception),()=>this.AlbumLogic.CreateAlbum(1,"TestN", DateTime.Parse("06/22/2021"), 11, 4.50, 26, 3, 2));
+        }
         private IQueryable<Album> FakeAlbumObjects()
         {
             Album a0 = new Album() { AlbumId = 1, AlbumName = "Test0", ReleasedDate = DateTime.Parse("03/12/1999"),NumberOfSongs = 13,GenreId = 2, ArtistId=6, Rating = 4.8, Length = 36.66};

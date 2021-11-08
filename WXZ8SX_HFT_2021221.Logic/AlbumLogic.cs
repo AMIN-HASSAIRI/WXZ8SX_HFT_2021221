@@ -19,6 +19,11 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public void CreateAlbum(int albumId, string albumName, DateTime releasedDate, int numberOfSongs, double rating, double length, int artistId, int genreId)
         {
+            var album = _albumRepository.GetAll().Where(al => al.AlbumId == albumId);
+            if (album.Count() > 0)
+            {
+                throw new Exception($"This {albumId} is already used!");
+            }
             Album newAlbum = new Album
             {
                 AlbumId = albumId,
