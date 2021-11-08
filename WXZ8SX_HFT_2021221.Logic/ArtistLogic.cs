@@ -13,6 +13,11 @@ namespace WXZ8SX_HFT_2021221.Logic
         private readonly IArtistRepository _artistRepository;
         private readonly IAlbumRepository _albumRepository;
 
+        public ArtistLogic(IArtistRepository artistRepository, IAlbumRepository albumRepository)
+        {
+            _artistRepository = artistRepository;
+            _albumRepository = albumRepository;
+        }
 
         public void CreateArtist(int artistId, string artistName, DateTime dateOfBirth, int numAlbums)
         {

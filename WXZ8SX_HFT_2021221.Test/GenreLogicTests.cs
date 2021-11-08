@@ -15,6 +15,7 @@ namespace WXZ8SX_HFT_2021221.Test
     public class GenreLogicTests
     {
         private GenreLogic GenreLogic { get; set; }
+
         [SetUp]
         public void Setup()
         {
