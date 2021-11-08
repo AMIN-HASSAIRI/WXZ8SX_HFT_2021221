@@ -72,11 +72,9 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public List<Album> GetAlbumsByYear(string YYYY)
         {
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
             List<Album> albumsByYear = new List<Album>();
 
-            var albums = _albumRepository.GetAll().Where(album => album.ReleasedDate.Year == int.Parse(YYYY)).ToList();
+            var albums = _albumRepository.GetAll().Where(album => album.ReleasedDate.Year == int.Parse(YYYY));
 
             if (albums == null)
             {
@@ -84,7 +82,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
             else
             {
-                foreach (Album album in albums)
+                foreach (var album in albums)
                 {
                     albumsByYear.Add(album);
                 }
