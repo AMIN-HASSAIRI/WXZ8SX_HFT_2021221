@@ -40,6 +40,12 @@ namespace WXZ8SX_HFT_2021221.Test
             this.AlbumLogic = new AlbumLogic(albumRepoMock.Object);
         }
         [Test]
+        public void GetOne_AlbumId_Positive()
+        {
+            var album = this.AlbumLogic.GetAlbum(1);
+            Assert.That(album.AlbumName, Is.EqualTo("Test1"));
+        }
+        [Test]
         public void GetAlbumsByYear_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetAlbumsByYear("1999").Count, Is.EqualTo(1));
@@ -73,6 +79,11 @@ namespace WXZ8SX_HFT_2021221.Test
         public void GetTheLongestAlbum_Positive()
         {
             Assert.That(this.AlbumLogic.GetTheLongestAlbum().Length, Is.EqualTo(36.66));
+        }
+        [Test]
+        public void GetTheShortestAlbum_Positive()
+        {
+            Assert.That(this.AlbumLogic.GetTheShortestAlbum().Length, Is.EqualTo(15.22));
         }
 
         private IQueryable<Album> FakeAlbumObjects()
