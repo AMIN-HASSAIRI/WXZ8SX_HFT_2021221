@@ -69,15 +69,19 @@ namespace WXZ8SX_HFT_2021221.Test
         {
             Assert.That(this.AlbumLogic.GetBestAlbums().Count, Is.GreaterThan(1));
         }
-
+        [Test]
+        public void GetTheLongestAlbum_Positive()
+        {
+            Assert.That(this.AlbumLogic.GetTheLongestAlbum().Length, Is.EqualTo(36.66));
+        }
 
         private IQueryable<Album> FakeAlbumObjects()
         {
-            Album a0 = new Album() { AlbumId = 1, AlbumName = "Test0", ReleasedDate = DateTime.Parse("03/12/1999"),NumberOfSongs = 13,GenreId = 2, ArtistId=6, Rating = 4.8};
-            Album a1 = new Album() { AlbumId = 2, AlbumName = "Test1", ReleasedDate = DateTime.Parse("02/21/2005"),NumberOfSongs = 9,GenreId = 3, ArtistId=3, Rating = 3.7};
-            Album a2 = new Album() { AlbumId = 3, AlbumName = "Test2", ReleasedDate = DateTime.Parse("03/19/1989"),NumberOfSongs = 7,GenreId = 2, ArtistId=5 , Rating = 4.8};
-            Album a3 = new Album() { AlbumId = 4, AlbumName = "Test3", ReleasedDate = DateTime.Parse("08/13/2020"),NumberOfSongs = 5,GenreId = 6, ArtistId=7 , Rating = 3.9};
-            Album a4 = new Album() { AlbumId = 5, AlbumName = "Test4", ReleasedDate = DateTime.Parse("04/29/2006"),NumberOfSongs = 12,GenreId = 4, ArtistId=1 , Rating = 2.0};
+            Album a0 = new Album() { AlbumId = 1, AlbumName = "Test0", ReleasedDate = DateTime.Parse("03/12/1999"),NumberOfSongs = 13,GenreId = 2, ArtistId=6, Rating = 4.8, Length = 36.66};
+            Album a1 = new Album() { AlbumId = 2, AlbumName = "Test1", ReleasedDate = DateTime.Parse("02/21/2005"),NumberOfSongs = 9,GenreId = 3, ArtistId=3, Rating = 3.7 , Length = 27.30};
+            Album a2 = new Album() { AlbumId = 3, AlbumName = "Test2", ReleasedDate = DateTime.Parse("03/19/1989"),NumberOfSongs = 7,GenreId = 2, ArtistId=5 , Rating = 4.8 , Length = 19.00};
+            Album a3 = new Album() { AlbumId = 4, AlbumName = "Test3", ReleasedDate = DateTime.Parse("08/13/2020"),NumberOfSongs = 5,GenreId = 6, ArtistId=7 , Rating = 3.9 , Length = 15.22};
+            Album a4 = new Album() { AlbumId = 5, AlbumName = "Test4", ReleasedDate = DateTime.Parse("04/29/2006"),NumberOfSongs = 12,GenreId = 4, ArtistId=1 , Rating = 2.0, Length = 25.20};
 
             List<Album> albums = new List<Album> { a0, a1, a2, a3, a4 };
             return albums.AsQueryable();
