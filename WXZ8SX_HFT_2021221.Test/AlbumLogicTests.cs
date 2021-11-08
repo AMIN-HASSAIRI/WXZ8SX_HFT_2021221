@@ -17,6 +17,7 @@ namespace WXZ8SX_HFT_2021221.Test
     public class AlbumLogicTests
     {
         private AlbumLogic AlbumLogic { get; set; }
+
         [SetUp]
         public void Setup()
         {
@@ -53,6 +54,15 @@ namespace WXZ8SX_HFT_2021221.Test
         {
             Assert.That(this.AlbumLogic.GetAlbumsByArtist(5), Is.Not.Null);
         }
+        [Test]
+        public void GetTheOldestAlbum_Positive()
+        {
+            Assert.That(this.AlbumLogic.GetTheOldestAlbum().ReleasedDate.ToString("MM/dd/yyyy"), Is.EqualTo("03/19/1989"));
+        }
+
+
+
+
         private IQueryable<Album> FakeAlbumObjects()
         {
             Album a0 = new Album() { AlbumId = 1, AlbumName = "Test0", ReleasedDate = DateTime.Parse("03/12/1999"),NumberOfSongs = 13,GenreId = 2, ArtistId=6};
