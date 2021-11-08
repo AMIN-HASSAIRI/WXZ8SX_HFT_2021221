@@ -45,6 +45,11 @@ namespace WXZ8SX_HFT_2021221.Test
             Assert.That(this.ArtistLogic.GetAlbumsOfArtist(7), Is.Not.Null);
         }
         [Test]
+        public void GetArtists_Positive_Test()
+        {
+            Assert.That(this.ArtistLogic.GetArtists(), Is.Not.Null);
+        }
+        [Test]
         public void GetArtist_Negative_Test()
         {
             Assert.Throws(typeof(Exception), () => this.ArtistLogic.GetArtist(6));
