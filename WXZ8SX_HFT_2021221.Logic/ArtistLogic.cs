@@ -56,8 +56,9 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public Artist GetArtist(int artistId)
         {
-            Artist artist = _artistRepository.GetOne(artistId);
-            if (artist == null)
+            var artistsCount = _artistRepository.GetAll().Count();
+            var artist = _artistRepository.GetOne(artistId);
+            if (artistId > artistsCount)
             {
                 throw new Exception("This artist ID does not exists!");
             }

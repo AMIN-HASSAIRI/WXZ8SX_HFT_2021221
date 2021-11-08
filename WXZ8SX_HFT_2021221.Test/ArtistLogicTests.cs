@@ -25,7 +25,7 @@ namespace WXZ8SX_HFT_2021221.Test
                 .Returns(new Artist()
                 {
                     ArtistId = 1, 
-                    ArtistName = "Test1",
+                    ArtistName = "Test111",
                     NumberOfAlbums = 6,
                     DateOfBirth = DateTime.Parse("03/22/2000"),
                 });
@@ -34,8 +34,21 @@ namespace WXZ8SX_HFT_2021221.Test
 
             this.ArtistLogic = new ArtistLogic(artistRepoMock.Object, albumRepoMock.Object);
         }
-
-
+        [Test]
+        public void GetAlbumNameByArtistId_Positive_Test()
+        {
+            Assert.That(this.ArtistLogic.GetAlbumNameByArtistId(1), Is.EqualTo("Test0"));
+        }
+        [Test]
+        public void GetAlbumsOfArtist_Positive_Test()
+        {
+            Assert.That(this.ArtistLogic.GetAlbumsOfArtist(7), Is.Not.Null);
+        }
+        [Test]
+        public void GetArtist_Negative_Test()
+        {
+            Assert.Throws(typeof(Exception), () => this.ArtistLogic.GetArtist(6));
+        }
 
 
         private IQueryable<Album> FakeAlbumObjects()
@@ -56,7 +69,7 @@ namespace WXZ8SX_HFT_2021221.Test
             Artist a1 = new Artist() { ArtistId = 2, ArtistName = "Test02", DateOfBirth = DateTime.Parse("07/22/1999"), NumberOfAlbums = 6 };
             Artist a2 = new Artist() { ArtistId = 3, ArtistName = "Test03", DateOfBirth = DateTime.Parse("11/12/1992"), NumberOfAlbums = 3 };
             Artist a3 = new Artist() { ArtistId = 4, ArtistName = "Test04", DateOfBirth = DateTime.Parse("08/23/1998"), NumberOfAlbums = 4 };
-            Artist a4 = new Artist() { ArtistId = 4, ArtistName = "Test05", DateOfBirth = DateTime.Parse("09/16/1993"), NumberOfAlbums = 7 };
+            Artist a4 = new Artist() { ArtistId = 5, ArtistName = "Test05", DateOfBirth = DateTime.Parse("09/16/1993"), NumberOfAlbums = 7 };
 
 
             List<Artist> artists = new List<Artist> { a0, a1, a2, a3, a4 };
