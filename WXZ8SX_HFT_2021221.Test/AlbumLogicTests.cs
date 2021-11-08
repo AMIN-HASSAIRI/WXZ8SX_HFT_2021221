@@ -40,7 +40,7 @@ namespace WXZ8SX_HFT_2021221.Test
             this.AlbumLogic = new AlbumLogic(albumRepoMock.Object);
         }
         [Test]
-        public void GetOne_AlbumId_Positive()
+        public void GetOne_AlbumId_Positive_Test()
         {
             var album = this.AlbumLogic.GetAlbum(1);
             Assert.That(album.AlbumName, Is.EqualTo("Test1"));
@@ -53,37 +53,42 @@ namespace WXZ8SX_HFT_2021221.Test
         [Test]
         public void GetAlbumsByYear_Empty_Test()
         {
-            Assert.That(this.AlbumLogic.GetAlbumsByYear("2020"), Is.Empty);
+            Assert.That(this.AlbumLogic.GetAlbumsByYear("2020"), Is.Not.Empty);
         }
         [Test]
-        public void GetAlbumsByArtistId_Positive()
+        public void GetAlbumsByArtistId_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetAlbumsByArtist(5), Is.Not.Null);
         }
         [Test]
-        public void GetTheOldestAlbum_Positive()
+        public void GetTheOldestAlbum_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetTheOldestAlbum().ReleasedDate.ToString("MM/dd/yyyy"), Is.EqualTo("03/19/1989"));
         }
         [Test]
-        public void GetTheNewestAlbum_Positive()
+        public void GetTheNewestAlbum_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetTheNewestAlbum().ReleasedDate.ToString("MM/dd/yyyy"), Is.EqualTo("08/13/2020"));
         }
         [Test]
-        public void GetBestAlbums_Positive()
+        public void GetBestAlbums_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetBestAlbums().Count, Is.GreaterThan(1));
         }
         [Test]
-        public void GetTheLongestAlbum_Positive()
+        public void GetTheLongestAlbum_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetTheLongestAlbum().Length, Is.EqualTo(36.66));
         }
         [Test]
-        public void GetTheShortestAlbum_Positive()
+        public void GetTheShortestAlbum_Positive_Test()
         {
             Assert.That(this.AlbumLogic.GetTheShortestAlbum().Length, Is.EqualTo(15.22));
+        }
+        [Test]
+        public void GetAlbumsByYear_Negative_Test()
+        {
+            Assert.Throws(typeof(Exception) , () => this.AlbumLogic.GetAlbumsByYear("2024"));
         }
 
         private IQueryable<Album> FakeAlbumObjects()

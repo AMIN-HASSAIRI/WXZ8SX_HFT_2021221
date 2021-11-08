@@ -76,9 +76,9 @@ namespace WXZ8SX_HFT_2021221.Logic
 
             var albums = _albumRepository.GetAll().Where(album => album.ReleasedDate.Year == int.Parse(YYYY));
 
-            if (albums == null)
+            if (albums.Count() == 0)
             {
-                throw new Exception();// $"There is no album in this year {YYYY}");
+                 throw new Exception($"There is no album in this year {YYYY}");
             }
             else
             {
@@ -86,8 +86,8 @@ namespace WXZ8SX_HFT_2021221.Logic
                 {
                     albumsByYear.Add(album);
                 }
+                return albumsByYear;
             }
-            return albumsByYear;
         }
 
         public List<Album> GetBestAlbums()
