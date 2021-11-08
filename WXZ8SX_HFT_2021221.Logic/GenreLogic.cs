@@ -31,14 +31,18 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public List<Album> GetAllAlbumsWithGenre(int genreId)
         {
-            Genre genre = _genreRepository.GetOne(genreId);
+            var genre = _genreRepository.GetOne(genreId);
             if (genre == null)
             {
                 throw new Exception($"Invalid genre ID: {genreId}");
             }
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-
-            return allAlbums.Where(album => album.GenreId == genre.GenreId).ToList();
+            List<Album> albumsGenre = new List<Album>();
+            var albums = _albumRepository.GetAll().Where(album => album.GenreId == genre.GenreId);
+            foreach (Album al in albums)
+            {
+                albumsGenre.Add(al);
+            }
+            return albumsGenre;
         }
 
         public Genre GetGenre(int genreId)
