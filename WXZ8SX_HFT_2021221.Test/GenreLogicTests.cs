@@ -31,6 +31,11 @@ namespace WXZ8SX_HFT_2021221.Test
 
             this.GenreLogic = new GenreLogic(genreRepoMock.Object, albumRepoMock.Object);
         }
+        [Test]
+        public void GetGenres_Positive_Test()
+        {
+            Assert.That(this.GenreLogic.GetGenres().Count, Is.EqualTo(5));
+        }
 
 
 
