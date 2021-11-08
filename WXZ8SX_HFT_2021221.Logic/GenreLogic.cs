@@ -13,6 +13,11 @@ namespace WXZ8SX_HFT_2021221.Logic
         private readonly IGenreRepository _genreRepository;
         private readonly IAlbumRepository _albumRepository;
 
+        public GenreLogic(IGenreRepository genreRepository, IAlbumRepository albumRepository)
+        {
+            _genreRepository = genreRepository;
+            _albumRepository = albumRepository;
+        }
 
         public void CreateGenre(int genreId, string genreName)
         {

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +7,30 @@ using System.Text;
 using System.Threading.Tasks;
 using WXZ8SX_HFT_2021221.Logic;
 using WXZ8SX_HFT_2021221.Models;
+using WXZ8SX_HFT_2021221.Repository;
 
 namespace WXZ8SX_HFT_2021221.Test
 {
     [TestFixture]
     public class GenreLogicTests
     {
-        private GenreLogic AlbumLogic { get; set; }
+        private GenreLogic GenreLogic { get; set; }
+        [SetUp]
+        public void Setup()
+        {
+            Mock<IGenreRepository> genreRepoMock = new Mock<IGenreRepository>();
+            Mock<IAlbumRepository> albumRepoMock = new Mock<IAlbumRepository>();
+            genreRepoMock.Setup(x => x.GetOne(It.IsAny<int>()))
+                .Returns(new Genre()
+                {
+                    GenreId = 1,
+                    GenreName = "Rap"
+                });
+            genreRepoMock.Setup(x => x.GetAll()).Returns(this.FakeGenreObjects);
+            albumRepoMock.Setup(x => x.GetAll()).Returns(this.FakeAlbumObjects);
 
+            this.GenreLogic = new GenreLogic(genreRepoMock.Object, albumRepoMock.Object);
+        }
 
 
 
