@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WXZ8SX_HFT_2021221.Data;
+using WXZ8SX_HFT_2021221.Logic;
 
 namespace WXZ8SX_HFT_2021221.Endpoint
 {
@@ -16,6 +18,14 @@ namespace WXZ8SX_HFT_2021221.Endpoint
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
+            services.AddTransient<IAlbumLogic, AlbumLogic>();
+            services.AddTransient<IGenreLogic, GenreLogic>();
+            services.AddTransient<ISongLogic, SongLogic>();
+            services.AddTransient<IArtistLogic, ArtistLogic>();
+            services.AddTransient<MusicDbContext, MusicDbContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
