@@ -147,5 +147,18 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
             _albumRepository.Delete(album);
         }
+        public void UpdateAlbum(Album album)
+        {
+            var albumToUpdate = _albumRepository.GetOne(album.AlbumId);
+            albumToUpdate.AlbumName = album.AlbumName;
+            albumToUpdate.ReleasedDate = album.ReleasedDate;
+            albumToUpdate.NumberOfSongs = album.NumberOfSongs;
+            albumToUpdate.Rating = album.Rating;
+            albumToUpdate.Length = album.Length;
+            albumToUpdate.ArtistId = album.ArtistId;
+            albumToUpdate.GenreId = album.GenreId;
+            
+            _albumRepository.Update(albumToUpdate);
+        }
     }
 }

@@ -39,5 +39,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _albumLogic.CreateAlbum(value.AlbumId,value.AlbumName,value.ReleasedDate,value.NumberOfSongs,value.Rating,value.Length,value.ArtistId,value.GenreId);
         }
+
+        // PUT Album
+        [HttpPut]
+        public void Put([FromBody] Album value)
+        {
+            _albumLogic.(value);
+        }
     }
 }
