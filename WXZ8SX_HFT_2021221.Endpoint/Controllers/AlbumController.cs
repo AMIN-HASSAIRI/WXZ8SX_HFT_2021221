@@ -32,5 +32,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _albumLogic.GetAlbum(id);
         }
+
+        // POST Album
+        [HttpPost]
+        public void Post([FromBody] Album value)
+        {
+            _albumLogic.CreateAlbum(value.AlbumId,value.AlbumName,value.ReleasedDate,value.NumberOfSongs,value.Rating,value.Length,value.ArtistId,value.GenreId);
+        }
     }
 }
