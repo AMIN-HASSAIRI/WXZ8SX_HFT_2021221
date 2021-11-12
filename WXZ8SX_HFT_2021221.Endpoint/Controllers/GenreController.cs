@@ -31,5 +31,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _genreLogic.GetGenre(id);
         }
+
+        // POST /genre
+        [HttpPost]
+        public void Post([FromBody] Genre value)
+        {
+            _genreLogic.CreateGenre(value.GenreId, value.GenreName);
+        }
     }
 }
