@@ -135,5 +135,16 @@ namespace WXZ8SX_HFT_2021221.Logic
                 _songRepository.Delete(song);
             }
         }
+        public void UpdateSong(Song song)
+        {
+            var songToUpdate = _songRepository.GetOne(song.SongId);
+            songToUpdate.Name = song.Name;
+            songToUpdate.Length = song.Length;
+            songToUpdate.Writer = song.Writer;
+            songToUpdate.Singer = song.Singer;
+            songToUpdate.AlbumId = song.AlbumId;
+
+            _songRepository.Update(songToUpdate);
+        }
     }
 }
