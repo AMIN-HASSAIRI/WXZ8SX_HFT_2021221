@@ -26,6 +26,11 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             return _albumLogic.GetAlbumsByArtist(id);
         }
 
-
+        // GET stat/getalbumsbyyear/2002
+        [HttpGet("{YYYY}")]
+        public IEnumerable<Album> GetAlbumsByYear(string YYYY)
+        {
+            return _albumLogic.GetAlbumsByYear(YYYY);
+        }
     }
 }
