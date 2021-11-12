@@ -46,5 +46,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _albumLogic.UpdateAlbum(value);
         }
+
+        // DELETE Album
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _albumLogic.RemoveAlbum(id);
+        }
     }
 }
