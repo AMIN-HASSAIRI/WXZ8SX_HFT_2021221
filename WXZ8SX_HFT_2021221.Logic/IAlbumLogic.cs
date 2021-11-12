@@ -32,6 +32,6 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         IEnumerable<Album> GetAlbumsByArtist(int artistId);
 
-
+        void UpdateAlbum(Album album);
     }
 }

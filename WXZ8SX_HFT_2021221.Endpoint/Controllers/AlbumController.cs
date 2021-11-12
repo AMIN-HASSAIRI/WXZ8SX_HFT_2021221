@@ -44,7 +44,7 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         [HttpPut]
         public void Put([FromBody] Album value)
         {
-            _albumLogic.(value);
+            _albumLogic.UpdateAlbum(value);
         }
     }
 }
