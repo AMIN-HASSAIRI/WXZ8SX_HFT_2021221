@@ -19,5 +19,6 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         IEnumerable<Album> GetAllAlbumsWithGenre(int genreId);
 
+        void UpdateGenre(Genre genre);
     }
 }

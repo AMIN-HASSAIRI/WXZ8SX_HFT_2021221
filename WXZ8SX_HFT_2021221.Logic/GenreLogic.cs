@@ -71,5 +71,13 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
             _genreRepository.Delete(genre);
         }
+        public void UpdateGenre(Genre genre)
+        {
+            var genreToUpdate = _genreRepository.GetOne(genre.GenreId);
+            genreToUpdate.GenreName = genre.GenreName;
+
+            _genreRepository.Update(genreToUpdate);
+        }
+
     }
 }
