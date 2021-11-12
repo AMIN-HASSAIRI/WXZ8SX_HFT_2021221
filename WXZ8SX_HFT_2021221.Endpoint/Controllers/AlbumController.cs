@@ -25,5 +25,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _albumLogic.GetAlbums();
         }
+
+        // Get Album
+        [HttpGet("{id}")]
+        public Album Get(int id)
+        {
+            return _albumLogic.GetAlbum(id);
+        }
     }
 }
