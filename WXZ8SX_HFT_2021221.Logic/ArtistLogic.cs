@@ -21,14 +21,25 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         public void CreateArtist(int artistId, string artistName, DateTime dateOfBirth, int numAlbums)
         {
-            Artist newArtist = new Artist
+            if (_artistRepository.GetOne(artistId) == null)
             {
-                ArtistId = artistId,
-                ArtistName = artistName,
-                DateOfBirth = dateOfBirth,
-                NumberOfAlbums = numAlbums
-            };
-            _artistRepository.Add(newArtist);
+                Artist newArtist = new Artist
+                {
+                    ArtistId = artistId,
+                    ArtistName = artistName,
+                    DateOfBirth = dateOfBirth,
+                    NumberOfAlbums = numAlbums
+                };
+                _artistRepository.Add(newArtist);
+            }
+            else if (artistName == "")
+            {
+                throw new ArgumentNullException("The artist name must not be empty!");
+            }
+            else if (_artistRepository.GetOne(artistId) != null)
+            {
+                throw new Exception($"This artist ID: {artistId} is already used!");
+            }
         }
 
         public string GetAlbumNameByArtistId(int artistId)

@@ -65,7 +65,29 @@ namespace WXZ8SX_HFT_2021221.Test
         {
             Assert.That(() => this.ArtistLogic.RemoveArtist(6), Throws.Nothing);
         }
-
+        [Test]
+        public void CreateArtist_Negative_Test()
+        {
+            //Arrange
+            Artist newArtist = new Artist 
+            {
+                ArtistId = 6,
+                ArtistName = "",
+                DateOfBirth = DateTime.Parse("02/27/2001"),
+                NumberOfAlbums = 11,
+            };
+            Artist newArtist2 = new Artist
+            {
+                ArtistId = 4,
+                ArtistName = "Nicki",
+                DateOfBirth = DateTime.Parse("12/17/2005"),
+                NumberOfAlbums = 7,
+            };
+            //Act
+            //Assert
+            Assert.Throws(typeof(ArgumentNullException), () => this.ArtistLogic.CreateArtist(newArtist.ArtistId, newArtist.ArtistName, newArtist.DateOfBirth, newArtist.NumberOfAlbums));
+            Assert.Throws(typeof(Exception), () => this.ArtistLogic.CreateArtist(newArtist2.ArtistId, newArtist2.ArtistName, newArtist2.DateOfBirth, newArtist2.NumberOfAlbums));
+        }
         private IQueryable<Album> FakeAlbumObjects()
         {
             Album a0 = new Album() { AlbumId = 1, AlbumName = "Test0", ReleasedDate = DateTime.Parse("03/12/1999"), NumberOfSongs = 13, GenreId = 1, ArtistId = 6, Rating = 4.8, Length = 36.66 };
