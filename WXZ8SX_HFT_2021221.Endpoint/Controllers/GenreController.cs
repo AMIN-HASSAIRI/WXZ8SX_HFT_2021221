@@ -24,5 +24,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _genreLogic.GetGenres();
         }
+
+        // GET /genre/4
+        [HttpGet("{id}")]
+        public Genre Get(int id)
+        {
+            return _genreLogic.GetGenre(id);
+        }
     }
 }
