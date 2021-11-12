@@ -46,5 +46,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _albumLogic.GetTheLongestAlbum();
         }
+
+        // GET stat/getthenewestalbum
+        [HttpGet]
+        public Album GetTheNewestAlbum()
+        {
+            return _albumLogic.GetTheNewestAlbum();
+        }
     }
 }
