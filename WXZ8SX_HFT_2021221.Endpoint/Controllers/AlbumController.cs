@@ -19,35 +19,35 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             _albumLogic = albumLogic;
         }
 
-        // GET /Album
+        // GET /album
         [HttpGet]
         public IEnumerable<Album> Get()
         {
             return _albumLogic.GetAlbums();
         }
 
-        // GET /Album/3
+        // GET /album/3
         [HttpGet("{id}")]
         public Album Get(int id)
         {
             return _albumLogic.GetAlbum(id);
         }
 
-        // POST /Album
+        // POST /album
         [HttpPost]
         public void Post([FromBody] Album value)
         {
             _albumLogic.CreateAlbum(value.AlbumId,value.AlbumName,value.ReleasedDate,value.NumberOfSongs,value.Rating,value.Length,value.ArtistId,value.GenreId);
         }
 
-        // PUT /Album
+        // PUT /album
         [HttpPut]
         public void Put([FromBody] Album value)
         {
             _albumLogic.UpdateAlbum(value);
         }
 
-        // DELETE /Album/6
+        // DELETE /album/6
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
