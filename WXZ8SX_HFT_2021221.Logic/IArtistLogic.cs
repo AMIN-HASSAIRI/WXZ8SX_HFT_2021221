@@ -27,5 +27,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         IEnumerable<Album> GetAlbumsOfArtist(int artistId);
 
+        void UpdateArtist(Artist artist);
+
     }
 }

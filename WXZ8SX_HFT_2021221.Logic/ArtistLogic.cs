@@ -142,5 +142,15 @@ namespace WXZ8SX_HFT_2021221.Logic
                 _artistRepository.Delete(artist);
             }
         }
+        public void UpdateArtist(Artist artist)
+        {
+            var artistToUpdate = _artistRepository.GetOne(artist.ArtistId);
+            artistToUpdate.ArtistName = artist.ArtistName;
+            artistToUpdate.DateOfBirth = artist.DateOfBirth;
+            artistToUpdate.NumberOfAlbums = artist.NumberOfAlbums;
+
+            _artistRepository.Update(artistToUpdate);
+        }
+
     }
 }
