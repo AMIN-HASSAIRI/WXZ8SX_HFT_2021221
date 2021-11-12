@@ -45,5 +45,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _genreLogic.UpdateGenre(value);
         }
+
+        // DELETE /genre/3
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _genreLogic.RemoveGenre(id);
+        }
     }
 }
