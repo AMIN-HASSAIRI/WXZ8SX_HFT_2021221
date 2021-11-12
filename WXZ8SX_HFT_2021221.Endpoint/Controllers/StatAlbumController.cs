@@ -32,5 +32,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _albumLogic.GetAlbumsByYear(YYYY);
         }
+
+        // GET stat/getbestalbums
+        [HttpGet]
+        public IEnumerable<Album> GetBestAlbums()
+        {
+            return _albumLogic.GetBestAlbums();
+        }
     }
 }
