@@ -38,5 +38,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _genreLogic.CreateGenre(value.GenreId, value.GenreName);
         }
+
+        // PUT /genre
+        [HttpPut]
+        public void Put([FromBody] Genre value)
+        {
+            _genreLogic.UpdateGenre(value);
+        }
     }
 }
