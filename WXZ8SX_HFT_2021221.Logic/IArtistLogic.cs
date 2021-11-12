@@ -9,7 +9,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface IArtistLogic
     {
-        List<Artist> GetArtists();
+        IEnumerable<Artist> GetArtists();
 
         Artist GetArtist(int artistId);
 
@@ -17,15 +17,15 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void RemoveArtist(int artistId);
 
-        List<Artist> GetArtistsOrderedByName();
+        IEnumerable<Artist> GetArtistsOrderedByName();
 
-        List<Artist> GetArtistsOrderedByBirthDate();
+        IEnumerable<Artist> GetArtistsOrderedByBirthDate();
 
-        List<Artist> GetArtistsOrderedByNumOfAlbums();
+        IEnumerable<Artist> GetArtistsOrderedByNumOfAlbums();
 
         string GetAlbumNameByArtistId(int artistId);
 
-        List<Album> GetAlbumsOfArtist(int artistId);
+        IEnumerable<Album> GetAlbumsOfArtist(int artistId);
 
     }
 }

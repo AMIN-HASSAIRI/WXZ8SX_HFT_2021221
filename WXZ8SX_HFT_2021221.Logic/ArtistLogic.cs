@@ -54,7 +54,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             return album.AlbumName;
         }
 
-        public List<Album> GetAlbumsOfArtist(int artistId)
+        public IEnumerable<Album> GetAlbumsOfArtist(int artistId)
         {
             Artist artist = _artistRepository.GetOne(artistId);
             if (artist == null)
@@ -79,12 +79,12 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
         }
 
-        public List<Artist> GetArtists()
+        public IEnumerable<Artist> GetArtists()
         {
             return _artistRepository.GetAll().ToList();
         }
 
-        public List<Artist> GetArtistsOrderedByBirthDate()
+        public IEnumerable<Artist> GetArtistsOrderedByBirthDate()
         {
             List<Artist> allArtists = _artistRepository.GetAll().ToList();
 
@@ -99,7 +99,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             return orderedArtists;
         }
 
-        public List<Artist> GetArtistsOrderedByName()
+        public IEnumerable<Artist> GetArtistsOrderedByName()
         {
             List<Artist> allArtists = _artistRepository.GetAll().ToList();
 
@@ -114,7 +114,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             return orderedArtists;
         }
 
-        public List<Artist> GetArtistsOrderedByNumOfAlbums()
+        public IEnumerable<Artist> GetArtistsOrderedByNumOfAlbums()
         {
             List<Artist> allArtists = _artistRepository.GetAll().ToList();
 

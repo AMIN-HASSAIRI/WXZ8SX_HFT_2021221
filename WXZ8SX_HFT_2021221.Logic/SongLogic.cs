@@ -80,12 +80,12 @@ namespace WXZ8SX_HFT_2021221.Logic
             return _songRepository.GetOne(songId);
         }
 
-        public List<Song> GetSongs()
+        public IEnumerable<Song> GetSongs()
         {
             return _songRepository.GetAll().ToList();
         }
 
-        public List<Song> GetSongsOrderedByLength()
+        public IEnumerable<Song> GetSongsOrderedByLength()
         {
             List<Song> orderedSongs = new List<Song>();
 
@@ -98,7 +98,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             return orderedSongs;
         }
 
-        public List<Song> GetSongsOrderedByName()
+        public IEnumerable<Song> GetSongsOrderedByName()
         {
             List<Song> orderedSongs = new List<Song>();
 

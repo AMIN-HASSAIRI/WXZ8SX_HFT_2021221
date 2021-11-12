@@ -9,7 +9,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface ISongLogic
     {
-        List<Song> GetSongs();
+        IEnumerable<Song> GetSongs();
 
         Song GetSong(int songId);
 
@@ -21,9 +21,9 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         DateTime GetDateOfBirthOfSinger(int songId);
 
-        List<Song> GetSongsOrderedByLength();
+        IEnumerable<Song> GetSongsOrderedByLength();
 
-        List<Song> GetSongsOrderedByName();
+        IEnumerable<Song> GetSongsOrderedByName();
 
         Song GetLongestSong();
 

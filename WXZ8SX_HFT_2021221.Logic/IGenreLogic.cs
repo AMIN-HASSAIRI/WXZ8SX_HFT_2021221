@@ -9,7 +9,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface IGenreLogic
     {
-        List<Genre> GetGenres();
+        IEnumerable<Genre> GetGenres();
 
         Genre GetGenre(int genreId);
 
@@ -17,7 +17,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         void RemoveGenre(int genreId);
 
-        List<Album> GetAllAlbumsWithGenre(int genreId);
+        IEnumerable<Album> GetAllAlbumsWithGenre(int genreId);
 
     }
 }

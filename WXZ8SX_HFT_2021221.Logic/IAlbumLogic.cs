@@ -9,7 +9,7 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface IAlbumLogic
     {
-        List<Album> GetAlbums();
+        IEnumerable<Album> GetAlbums();
 
         Album GetAlbum(int id);
 
@@ -22,15 +22,15 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         Album GetTheNewestAlbum();
 
-        List<Album> GetBestAlbums();
+        IEnumerable<Album> GetBestAlbums();
 
-        List<Album> GetAlbumsByYear(string YYYY);
+        IEnumerable<Album> GetAlbumsByYear(string YYYY);
 
         Album GetTheLongestAlbum();
 
         Album GetTheShortestAlbum();
 
-        List<Album> GetAlbumsByArtist(int artistId);
+        IEnumerable<Album> GetAlbumsByArtist(int artistId);
 
 
     }

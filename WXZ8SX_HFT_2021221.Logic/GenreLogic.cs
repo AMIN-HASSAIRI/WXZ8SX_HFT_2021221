@@ -36,7 +36,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
         }
 
-        public List<Album> GetAllAlbumsWithGenre(int genreId)
+        public IEnumerable<Album> GetAllAlbumsWithGenre(int genreId)
         {
             var genre = _genreRepository.GetOne(genreId);
             if (genre == null)
@@ -57,7 +57,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             return _genreRepository.GetOne(genreId);
         }
 
-        public List<Genre> GetGenres()
+        public IEnumerable<Genre> GetGenres()
         {
             return _genreRepository.GetAll().ToList();
         }

@@ -51,12 +51,12 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
         }
 
-        public List<Album> GetAlbums()
+        public IEnumerable<Album> GetAlbums()
         {
             return _albumRepository.GetAll().ToList();
         }
 
-        public List<Album> GetAlbumsByArtist(int artistId)
+        public IEnumerable<Album> GetAlbumsByArtist(int artistId)
         {
             List<Album> albumsByArtist = new List<Album>();
 
@@ -75,7 +75,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             return albumsByArtist;
         }
 
-        public List<Album> GetAlbumsByYear(string YYYY)
+        public IEnumerable<Album> GetAlbumsByYear(string YYYY)
         {
             List<Album> albumsByYear = new List<Album>();
 
@@ -95,7 +95,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
         }
 
-        public List<Album> GetBestAlbums()
+        public IEnumerable<Album> GetBestAlbums()
         {
             List<Album> bestAlbums = new List<Album>();
 
