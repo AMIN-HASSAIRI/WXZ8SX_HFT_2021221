@@ -19,20 +19,20 @@ namespace WXZ8SX_HFT_2021221.Logic
             _albumRepository = albumRepository;
         }
 
-        public void CreateGenre(int genreId, string genreName)
+        public void CreateGenre(Genre genre)
         {
-            if (_genreRepository.GetOne(genreId) == null)
+            if (_genreRepository.GetOne(genre.GenreId) == null)
             {
-                Genre newGenre = new Genre
+                genre = new Genre
                 {
-                    GenreId = genreId,
-                    GenreName = genreName
+                    GenreId = genre.GenreId,
+                    GenreName = genre.GenreName
                 };
-                _genreRepository.Add(newGenre);
+                _genreRepository.Add(genre);
             }
             else
             {
-                throw new Exception($"this genre Id {genreId} is already exists!");
+                throw new Exception($"this genre Id {genre.GenreId} is already exists!");
             }
         }
 

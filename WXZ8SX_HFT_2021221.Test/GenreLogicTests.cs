@@ -50,7 +50,10 @@ namespace WXZ8SX_HFT_2021221.Test
         [Test]
         public void CreateGenre_Negative_Test()
         {
-            Assert.Throws(typeof(Exception), () => this.GenreLogic.CreateGenre(1, "Test5"));
+            //Arrange
+            Genre genre = new Genre { GenreId = 1, GenreName = "Test5" };
+            //Assert
+            Assert.Throws(typeof(Exception), () => this.GenreLogic.CreateGenre(genre));
         }
 
         private IQueryable<Album> FakeAlbumObjects()

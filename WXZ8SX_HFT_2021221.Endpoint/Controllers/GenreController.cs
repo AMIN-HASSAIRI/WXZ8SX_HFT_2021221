@@ -36,7 +36,7 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         [HttpPost]
         public void Post([FromBody] Genre value)
         {
-            _genreLogic.CreateGenre(value.GenreId, value.GenreName);
+            _genreLogic.CreateGenre(value);
         }
 
         // PUT /genre
