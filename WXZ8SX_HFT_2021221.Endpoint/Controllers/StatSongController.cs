@@ -24,5 +24,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _songLogic.GetAlbumNameOfSong(id);
         }
+
+        // GET statsong/getdateofbirthofsinger/3
+        [HttpGet("{id}")]
+        public DateTime GetDateOfBirthOfSinger(int id)
+        {
+            return _songLogic.GetDateOfBirthOfSinger(id);
+        }
     }
 }
