@@ -39,5 +39,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _songLogic.CreateSong(value.SongId, value.Name,value.Length, value.Writer,value.Singer,value.AlbumId);
         }
+
+        // PUT /song
+        [HttpPut]
+        public void Put([FromBody] Song value)
+        {
+            _songLogic.UpdateSong(value);
+        }
     }
 }
