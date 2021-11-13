@@ -17,5 +17,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _songLogic = songLogic;
         }
+
+        // GET statsong/getalbumnameofsong/4
+        [HttpGet("{id}")]
+        public string GetAlbumNameOfSong(int id)
+        {
+            return _songLogic.GetAlbumNameOfSong(id);
+        }
     }
 }
