@@ -60,5 +60,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _songLogic.GetSongsOrderedByName();
         }
+
+        // GET statsong/getwriternameofsong/5
+        [HttpGet("{id}")]
+        public string GetWriterNameOfSong(int id)
+        {
+            return _songLogic.GetWriterNameOfSong(id);
+        }
     }
 }
