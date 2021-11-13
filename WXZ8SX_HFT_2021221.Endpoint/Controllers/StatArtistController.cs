@@ -40,5 +40,11 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             return _artistLogic.GetArtist(id);
         }
 
+        // GET statartist/getartists
+        [HttpGet]
+        public IEnumerable<Artist> GetArtists()
+        {
+            return _artistLogic.GetArtists();
+        }
     }
 }
