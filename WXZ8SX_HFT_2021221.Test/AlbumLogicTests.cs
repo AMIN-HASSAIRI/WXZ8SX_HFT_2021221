@@ -93,7 +93,11 @@ namespace WXZ8SX_HFT_2021221.Test
         [Test]
         public void CreateAlbum_Negative_Test()
         {
-             Assert.Throws(typeof(Exception),()=>this.AlbumLogic.CreateAlbum(1,"TestN", DateTime.Parse("06/22/2021"), 11, 4.50, 26, 3, 2));
+            //Arrange
+            Album album = new Album { AlbumId = 1, AlbumName = "TestN", ReleasedDate = DateTime.Parse("06/22/2021"), NumberOfSongs = 11, Rating = 4.50, Length = 26, ArtistId = 3, GenreId = 2 };
+
+            //Assert
+            Assert.Throws(typeof(Exception),()=>this.AlbumLogic.CreateAlbum(album));
         }
         private IQueryable<Album> FakeAlbumObjects()
         {

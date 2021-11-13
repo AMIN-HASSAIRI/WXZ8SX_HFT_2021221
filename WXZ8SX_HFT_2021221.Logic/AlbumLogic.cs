@@ -17,25 +17,25 @@ namespace WXZ8SX_HFT_2021221.Logic
             _albumRepository = albumRepository;
         }
 
-        public void CreateAlbum(int albumId, string albumName, DateTime releasedDate, int numberOfSongs, double rating, double length, int artistId, int genreId)
+        public void CreateAlbum(Album album)
         {
-            var album = _albumRepository.GetAll().Where(al => al.AlbumId == albumId);
-            if (album.Count() > 0)
+            var al = _albumRepository.GetAll().Where(alb => alb.AlbumId == album.AlbumId);
+            if (al.Count() > 0)
             {
-                throw new Exception($"This {albumId} is already used!");
+                throw new Exception($"This {album.AlbumName} is already used!");
             }
-            Album newAlbum = new Album
+            album = new Album
             {
-                AlbumId = albumId,
-                AlbumName = albumName,
-                ReleasedDate = releasedDate,
-                NumberOfSongs = numberOfSongs,
-                Rating = rating,
-                Length = length,
-                ArtistId = artistId,
-                GenreId = genreId
+                AlbumId = album.AlbumId,
+                AlbumName = album.AlbumName,
+                ReleasedDate = album.ReleasedDate,
+                NumberOfSongs = album.NumberOfSongs,
+                Rating = album.Rating,
+                Length = album.Length,
+                ArtistId = album.ArtistId,
+                GenreId = album.GenreId
             };
-            _albumRepository.Add(newAlbum);
+            _albumRepository.Add(album);
         }
 
         public Album GetAlbum(int id)
