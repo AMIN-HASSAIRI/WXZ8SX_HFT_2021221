@@ -17,5 +17,13 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _artistLogic = artistLogic;
         }
+
+        // GET stat/artist/4
+        [HttpGet("{id}")]
+        public string GetAlbumNameByArtistId(int id)
+        {
+            return _artistLogic.GetAlbumNameByArtistId(id);
+        }
+
     }
 }
