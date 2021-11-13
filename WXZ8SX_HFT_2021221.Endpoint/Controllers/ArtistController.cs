@@ -25,5 +25,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _artistLogic.GetArtists();
         }
+
+        // GET /artist/4
+        [HttpGet("{id}")]
+        public Artist Get(int id)
+        {
+            return _artistLogic.GetArtist(id);
+        }
     }
 }
