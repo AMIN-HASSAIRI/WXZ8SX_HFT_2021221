@@ -60,5 +60,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _artistLogic.GetArtistsOrderedByName();
         }
+
+        // GET statartist/getartistsorderedbynumofalbums
+        [HttpGet]
+        public IEnumerable<Artist> GetArtistsOrderedByNumOfAlbums()
+        {
+            return _artistLogic.GetArtistsOrderedByNumOfAlbums();
+        }
     }
 }
