@@ -53,5 +53,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _songLogic.GetSongsOrderedByLength();
         }
+
+        // GET statsong/getsongsorderedbyname
+        [HttpGet]
+        public IEnumerable<Song> GetSongsOrderedByName()
+        {
+            return _songLogic.GetSongsOrderedByName();
+        }
     }
 }
