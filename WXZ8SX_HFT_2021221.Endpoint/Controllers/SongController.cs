@@ -46,5 +46,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _songLogic.UpdateSong(value);
         }
+
+        // DELETE /song/2
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _songLogic.RemoveSong(id);
+        }
     }
 }
