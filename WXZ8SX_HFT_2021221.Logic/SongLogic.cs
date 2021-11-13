@@ -14,18 +14,25 @@ namespace WXZ8SX_HFT_2021221.Logic
         protected readonly IAlbumRepository _albumRepository;
         protected readonly IArtistRepository _artistRepository;
 
-        public void CreateSong(int songId, string songName, double songLength, string writer, string singer, int albumId)
+        public void CreateSong(Song song)
         {
-            Song newSong = new Song
+            if (_songRepository.GetOne(song.SongId) == null)
             {
-                SongId = songId,
-                Name = songName,
-                Length = songLength,
-                Writer = writer,
-                Singer = singer,
-                AlbumId = albumId
-            };
-            _songRepository.Add(newSong);
+                song = new Song
+                {
+                    SongId = song.SongId,
+                    Name = song.Name,
+                    Length = song.Length,
+                    Writer = song.Writer,
+                    Singer = song.Singer,
+                    AlbumId = song.AlbumId
+                };
+                _songRepository.Add(song);
+            }
+            else
+            {
+                throw new Exception($"This song Id {song.SongId} is already used!");
+            }
         }
 
         public string GetAlbumNameOfSong(int songId)

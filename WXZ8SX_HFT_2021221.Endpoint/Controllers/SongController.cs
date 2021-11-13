@@ -37,7 +37,7 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         [HttpPost]
         public void Post([FromBody] Song value)
         {
-            _songLogic.CreateSong(value.SongId, value.Name,value.Length, value.Writer,value.Singer,value.AlbumId);
+            _songLogic.CreateSong(value);
         }
 
         // PUT /song
