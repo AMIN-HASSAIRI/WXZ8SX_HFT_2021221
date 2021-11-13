@@ -46,5 +46,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             _artistLogic.UpdateArtist(value);
         }
+
+        // DELETE /artist/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _artistLogic.RemoveArtist(id);
+        }
     }
 }
