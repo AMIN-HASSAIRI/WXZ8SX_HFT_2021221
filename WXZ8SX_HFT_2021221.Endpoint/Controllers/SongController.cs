@@ -25,5 +25,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _songLogic.GetSongs();
         }
+
+        // GET /song/4
+        [HttpGet("{id}")]
+        public Song Get(int id)
+        {
+            return _songLogic.GetSong(id);
+        }
     }
 }
