@@ -19,26 +19,26 @@ namespace WXZ8SX_HFT_2021221.Logic
             _albumRepository = albumRepository;
         }
 
-        public void CreateArtist(int artistId, string artistName, DateTime dateOfBirth, int numAlbums)
+        public void CreateArtist(Artist artist)
         {
-            if (_artistRepository.GetOne(artistId) == null)
+            if (_artistRepository.GetOne(artist.ArtistId) == null)
             {
-                Artist newArtist = new Artist
+                artist = new Artist
                 {
-                    ArtistId = artistId,
-                    ArtistName = artistName,
-                    DateOfBirth = dateOfBirth,
-                    NumberOfAlbums = numAlbums
+                    ArtistId = artist.ArtistId,
+                    ArtistName = artist.ArtistName,
+                    DateOfBirth = artist.DateOfBirth,
+                    NumberOfAlbums = artist.NumberOfAlbums
                 };
-                _artistRepository.Add(newArtist);
+                _artistRepository.Add(artist);
             }
-            else if (artistName == "")
+            else if (artist.ArtistName == "")
             {
                 throw new ArgumentNullException("The artist name must not be empty!");
             }
-            else if (_artistRepository.GetOne(artistId) != null)
+            else if (_artistRepository.GetOne(artist.ArtistId) != null)
             {
-                throw new Exception($"This artist ID: {artistId} is already used!");
+                throw new Exception($"This artist ID: {artist.ArtistId} is already used!");
             }
         }
 

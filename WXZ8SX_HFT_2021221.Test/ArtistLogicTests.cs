@@ -85,8 +85,8 @@ namespace WXZ8SX_HFT_2021221.Test
             };
             //Act
             //Assert
-            Assert.Throws(typeof(ArgumentNullException), () => this.ArtistLogic.CreateArtist(newArtist.ArtistId, newArtist.ArtistName, newArtist.DateOfBirth, newArtist.NumberOfAlbums));
-            Assert.Throws(typeof(Exception), () => this.ArtistLogic.CreateArtist(newArtist2.ArtistId, newArtist2.ArtistName, newArtist2.DateOfBirth, newArtist2.NumberOfAlbums));
+            Assert.Throws(typeof(ArgumentNullException), () => this.ArtistLogic.CreateArtist(newArtist));
+            Assert.Throws(typeof(Exception), () => this.ArtistLogic.CreateArtist(newArtist2));
         }
         private IQueryable<Album> FakeAlbumObjects()
         {
