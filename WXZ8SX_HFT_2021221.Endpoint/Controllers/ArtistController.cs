@@ -33,11 +33,18 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             return _artistLogic.GetArtist(id);
         }
 
-        // POST /album
+        // POST /artist
         [HttpPost]
         public void Post([FromBody] Artist value)
         {
             _artistLogic.CreateArtist(value.ArtistId, value.ArtistName, value.DateOfBirth, value.NumberOfAlbums);
+        }
+
+        // PUT /artist
+        [HttpPut]
+        public void Put([FromBody] Artist value)
+        {
+            _artistLogic.UpdateArtist(value);
         }
     }
 }
