@@ -46,5 +46,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _artistLogic.GetArtists();
         }
+
+        // GET statartist/getartistsorderedbybirthdate
+        [HttpGet]
+        public IEnumerable<Artist> GetArtistsOrderedByBirthDate()
+        {
+            return _artistLogic.GetArtistsOrderedByBirthDate();
+        }
     }
 }
