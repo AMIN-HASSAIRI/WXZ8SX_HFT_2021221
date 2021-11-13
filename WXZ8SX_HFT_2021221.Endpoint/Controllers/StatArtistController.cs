@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WXZ8SX_HFT_2021221.Logic;
+using WXZ8SX_HFT_2021221.Models;
 
 namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
 {
@@ -18,11 +19,18 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             _artistLogic = artistLogic;
         }
 
-        // GET stat/artist/4
+        // GET statartist/getalbumnamebyartistid/4
         [HttpGet("{id}")]
         public string GetAlbumNameByArtistId(int id)
         {
             return _artistLogic.GetAlbumNameByArtistId(id);
+        }
+
+        // GET statartist/getalbumsofartist/3
+        [HttpGet("{id}")]
+        public IEnumerable<Album> GetAlbumsOfArtist(int id)
+        {
+            return _artistLogic.GetAlbumsOfArtist(id);
         }
 
     }
