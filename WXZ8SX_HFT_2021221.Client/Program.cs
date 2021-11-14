@@ -30,6 +30,7 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuDelete = new ConsoleMenu()
                .Add(">> DELETE ALBUM", () => DeleteAlbum())
                .Add(">> DELETE GENRE", () => DeleteGenre())
+               .Add(">> DELETE ARTIST", () => DeleteArtist())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -222,6 +223,27 @@ namespace WXZ8SX_HFT_2021221.Client
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine($"THIS GENRE NAME: {(rest.Get<Genre>(id, "genre")).GenreName} WILL BE DELETED!");
                 rest.Delete(id, "genre");
+                Console.WriteLine("DELETED!");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void DeleteArtist()
+        {
+            try
+            {
+                Console.WriteLine("::DELETE ARTIST::");
+                Console.WriteLine("INSERT THE ID OF THE ARTIST TO BE DELETED!");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine($"THIS ARTIST NAME: {(rest.Get<Artist>(id, "artist")).ArtistName} WILL BE DELETED!");
+                rest.Delete(id, "artist");
                 Console.WriteLine("DELETED!");
             }
             catch (InvalidOperationException ex)
