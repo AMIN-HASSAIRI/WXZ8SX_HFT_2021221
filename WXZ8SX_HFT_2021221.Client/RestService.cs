@@ -64,5 +64,12 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             return item;
         }
+        public void Post<T>(T item, string endpoint)
+        {
+            HttpResponseMessage response =
+                client.PostAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
