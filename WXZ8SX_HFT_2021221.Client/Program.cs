@@ -14,6 +14,8 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuCreate = new ConsoleMenu()
                .Add(">> CREATE ALBUM", () => CreateAlbum())
                .Add(">> CREATE GENRE", () => CreateGenre())
+               .Add(">> CREATE ARTIST", () => CreateArtist())
+               .Add(">> CREATE SONG", () => CreateSong())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -52,6 +54,8 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.WriteLine("Press any key to continue..");
             Console.ReadKey();
         }
+
+
         private static void CreateAlbum()
         {
             try
@@ -100,6 +104,68 @@ namespace WXZ8SX_HFT_2021221.Client
                 {
                     GenreName = name,
                 }, "genre");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void CreateArtist()
+        {
+            try
+            {
+                Console.WriteLine("::CREATE ARTIST::");
+                Console.WriteLine("INSERT ARTIST NAME!");
+                string name = Console.ReadLine();
+                Console.WriteLine("INSERT DATE OF BIRTH OF THE ARTIST! (MM/dd/yyyy)");
+                DateTime date = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT NUMBER OF ALBUMS!");
+                int num = int.Parse(Console.ReadLine());
+                rest.Post<Artist>(new Artist()
+                {
+                    ArtistName = name,
+                    DateOfBirth = date,
+                    NumberOfAlbums = num,
+                }, "artist");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void CreateSong()
+        {
+            try
+            {
+                Console.WriteLine("::CREATE SONG::");
+                Console.WriteLine("INSERT SONG NAME!");
+                string name = Console.ReadLine();
+                Console.WriteLine("INSERT SONG LENGTH!");
+                double length = double.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT THE WRITER OF THE SONG!");
+                string writer = Console.ReadLine();
+                Console.WriteLine("INSERT THE SINGER OF THE SONG!");
+                string singer = Console.ReadLine();
+                Console.WriteLine("INSERT ALBUM ID!");
+                int albumId = int.Parse(Console.ReadLine());
+                rest.Post<Song>(new Song()
+                {
+                    Name = name,
+                    Length = length,
+                    Writer = writer,
+                    Singer = singer,
+                    AlbumId = albumId,
+                }, "song");
             }
             catch (FormatException ex)
             {
