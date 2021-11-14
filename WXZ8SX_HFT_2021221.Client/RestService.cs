@@ -11,6 +11,28 @@ namespace WXZ8SX_HFT_2021221.Client
     {
         HttpClient client;
 
+        public RestService(string baseurl)
+        {
+            Init(baseurl);
+        }
 
+        private void Init(string baseurl)
+        {
+            client = new HttpClient();
+            client.BaseAddress = new Uri(baseurl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue
+                ("application/json"));
+            try
+            {
+                client.GetAsync("").GetAwaiter().GetResult();
+            }
+            catch (HttpRequestException)
+            {
+                throw new ArgumentException("Endpoint is not available!");
+            }
+
+        }
     }
 }
