@@ -54,5 +54,15 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             return item;
         }
+        public T Get<T>(int id, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            return item;
+        }
     }
 }
