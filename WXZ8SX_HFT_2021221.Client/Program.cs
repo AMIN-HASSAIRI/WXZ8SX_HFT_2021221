@@ -6,13 +6,13 @@ namespace WXZ8SX_HFT_2021221.Client
 {
     class Program
     {
-        static RestService rest = new RestService("http://localhost:54726");
+        static RestService rest = new RestService("http://localhost:49755");
 
         static void Main(string[] args)
         {
             System.Threading.Thread.Sleep(8000);
 
-            //RestService rest = new RestService("http://localhost:54726");
+            //RestService rest = new RestService("http://localhost:49755");
 
             var menu = new ConsoleMenu(args, level: 0)
                .Add(">> GET ALBUMS", () => GetAlbums())
@@ -29,6 +29,7 @@ namespace WXZ8SX_HFT_2021221.Client
 
 
             menu.Show();
+
         }
         private static void GetAlbums()
         {
@@ -37,6 +38,8 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 Console.WriteLine(item.AlbumName);
             }
+            Console.WriteLine("Press any key to continue..");
+            Console.ReadKey();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WXZ8SX_HFT_2021221.Models
@@ -29,12 +30,14 @@ namespace WXZ8SX_HFT_2021221.Models
         public double Length { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public Artist Artist { get; set; }
 
         [ForeignKey(nameof(Artist))]
         public int ArtistId { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public Genre Genre { get; set; }
 
         [ForeignKey(nameof(Genre))]
