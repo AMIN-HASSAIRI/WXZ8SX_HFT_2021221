@@ -34,6 +34,7 @@ namespace WXZ8SX_HFT_2021221.Client
             }
 
         }
+
         public List<T> Get<T>(string endpoint)
         {
             List<T> items = new List<T>();
@@ -44,6 +45,7 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             return items;
         }
+
         public T GetSingle<T>(string endpoint)
         {
             T item = default(T);
@@ -54,6 +56,7 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             return item;
         }
+
         public T Get<T>(int id, string endpoint)
         {
             T item = default(T);
@@ -64,6 +67,7 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             return item;
         }
+
         public void Post<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
@@ -71,10 +75,20 @@ namespace WXZ8SX_HFT_2021221.Client
 
             response.EnsureSuccessStatusCode();
         }
+
         public void Delete(int id, string endpoint)
         {
             HttpResponseMessage response =
                 client.DeleteAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        public void Put<T>(T item, string endpoint)
+        {
+            HttpResponseMessage response =
+                client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
+
 
             response.EnsureSuccessStatusCode();
         }
