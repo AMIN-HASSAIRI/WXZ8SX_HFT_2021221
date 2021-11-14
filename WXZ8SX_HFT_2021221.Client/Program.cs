@@ -46,6 +46,7 @@ namespace WXZ8SX_HFT_2021221.Client
 
             var subMenuList = new ConsoleMenu()
                .Add(">> LIST ALBUMS", () => GetAllAlbums())
+               .Add(">> LIST GENRES", () => GetAllGenres())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -72,16 +73,6 @@ namespace WXZ8SX_HFT_2021221.Client
             subMenuList.Show();
             //menu.Show();
 
-        }
-        private static void GetAlbums()
-        {
-            var allAlbums = rest.Get<Album>("album");
-            foreach (var item in allAlbums)
-            {
-                Console.WriteLine(item.AlbumName);
-            }
-            Console.WriteLine("Press any key to continue..");
-            Console.ReadKey();
         }
 
         #region CREATE METHODS
@@ -312,6 +303,23 @@ namespace WXZ8SX_HFT_2021221.Client
                     item.AlbumId, item.AlbumName,
                     item.ReleasedDate, item.NumberOfSongs, item.Rating,
                     item.ArtistId, item.GenreId);
+            }
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
+        private static void GetAllGenres()
+        {
+            Console.WriteLine("\n::ALL GENRES::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-25}", "ID", "Genre Name");
+            Console.ResetColor();
+
+            var allGenres = rest.Get<Genre>("genre");
+            string data = "";
+            foreach (var item in allGenres)
+            {
+                data += String.Format("{0,4} {1,-25}\n", item.GenreId, item.GenreName);
             }
             Console.WriteLine(data);
 
