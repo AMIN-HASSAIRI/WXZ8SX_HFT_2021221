@@ -26,7 +26,19 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
                });
-
+            
+            var subMenuDelete = new ConsoleMenu()
+               .Add(">> DELETE ALBUM", () => DeleteAlbum())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
             //var menu = new ConsoleMenu(args, level: 0)
             //   .Add(">> GET ALBUMS", () => GetAlbums())
             //   .Add("Close", ConsoleMenu.Close)
@@ -55,7 +67,7 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.ReadKey();
         }
 
-
+        #region CREATE METHODS
         private static void CreateAlbum()
         {
             try
@@ -172,6 +184,29 @@ namespace WXZ8SX_HFT_2021221.Client
                 Console.WriteLine(ex.Message);
             }
             catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        #endregion
+
+        private static void DeleteAlbum()
+        {
+            try
+            {
+                Console.WriteLine("::DELETE ALBUM::");
+                Console.WriteLine("INSERT THE ID OF THE ALBUM TO DELETE!");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine($"THIS ALBUM {(rest.Get<Album>(id, "album")).AlbumName}");
+                rest.Delete(id, "album");
+                Console.WriteLine("DELETED!");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
             }
