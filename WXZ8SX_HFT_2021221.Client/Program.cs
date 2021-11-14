@@ -63,6 +63,7 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuGetById = new ConsoleMenu()
                .Add(">> GET ALBUM BY ID", () => GetAlbumById())
                .Add(">> GET GENRE BY ID", () => GetGenreById())
+               .Add(">> GET ARTIST BY ID", () => GetArtistById())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -421,8 +422,34 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.ResetColor();
             try
             {
-                var album = rest.GetSingle<Genre>($"genre/{id}");
-                string data = String.Format("{0,4} {1,-25}\n", album.GenreId, album.GenreName);
+                var genre = rest.GetSingle<Genre>($"genre/{id}");
+                string data = String.Format("{0,4} {1,-25}\n", genre.GenreId, genre.GenreName);
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void GetArtistById()
+        {
+            Console.WriteLine("\n::GET ARTIST BY ID::\n");
+            Console.WriteLine("INSERT ARTIST ID!");
+            int id = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
+                             "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
+            Console.ResetColor();
+            try
+            {
+                var artist = rest.GetSingle<Artist>($"artist/{id}");
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                    artist.ArtistId, artist.ArtistName, artist.DateOfBirth, artist.NumberOfAlbums);
                 Console.WriteLine(data);
             }
             catch (InvalidOperationException ex)
