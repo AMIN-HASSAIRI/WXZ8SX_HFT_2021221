@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WXZ8SX_HFT_2021221.Models
@@ -30,6 +31,7 @@ namespace WXZ8SX_HFT_2021221.Models
         public string Singer { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public Album Album { get; set; }
         [ForeignKey(nameof(Album))]
         public int AlbumId { get; set; }

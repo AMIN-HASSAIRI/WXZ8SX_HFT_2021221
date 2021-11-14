@@ -48,6 +48,20 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> LIST ALBUMS", () => GetAllAlbums())
                .Add(">> LIST GENRES", () => GetAllGenres())
                .Add(">> LIST ARTISTS", () => GetAllArtists())
+               .Add(">> LIST SONGS", () => GetAllSongs()) //ERROR!!
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
+
+            var subMenuGetById = new ConsoleMenu()
+               .Add(">> GET ALBUM BY ID", () => GetAlbumById())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -71,7 +85,7 @@ namespace WXZ8SX_HFT_2021221.Client
             //       config.EnableBreadcrumb = true;
             //   });
 
-            subMenuList.Show();
+            subMenuGetById.Show();
             //menu.Show();
 
         }
@@ -287,6 +301,7 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         #endregion
 
+        #region GETALL LIST METHODS
         private static void GetAllAlbums()
         {
             Console.WriteLine("\n::ALL ALBUMS::\n");
@@ -343,6 +358,56 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             Console.WriteLine(data);
 
+            Console.ReadLine();
+        }
+        private static void GetAllSongs()
+        {
+            Console.WriteLine("\n::ALL SONGS::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+                "ID", "Song Name", "Length","Writer","Singer","Album ID");
+            Console.ResetColor();
+
+            var allSongs = rest.Get<Song>("song");
+            string data = "";
+            foreach (var item in allSongs)
+            {
+                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                    item.SongId, item.Name, item.Length, item.Writer, item.Singer, item.AlbumId);
+            }
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
+        #endregion
+
+        private static void GetAlbumById()
+        {
+            Console.WriteLine("\n::GET ALBUM BY ID::\n");
+            Console.WriteLine("INSERT ALBUM ID!");
+            int id = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
+            try
+            {
+                var album = rest.GetSingle<Album>($"album/{id}");
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                    album.AlbumId, album.AlbumName,
+                    album.ReleasedDate, album.NumberOfSongs, album.Rating,
+                    album.ArtistId, album.GenreId);
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         }
     }

@@ -9,7 +9,6 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface ISongLogic
     {
-        IEnumerable<Song> GetSongs();
 
         Song GetSong(int songId);
 
@@ -32,5 +31,8 @@ namespace WXZ8SX_HFT_2021221.Logic
         string GetAlbumNameOfSong(int songId);
 
         void UpdateSong(Song song);
+
+        IEnumerable<Song> GetSongs();
+
     }
 }
