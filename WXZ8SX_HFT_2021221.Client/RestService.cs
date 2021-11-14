@@ -71,5 +71,12 @@ namespace WXZ8SX_HFT_2021221.Client
 
             response.EnsureSuccessStatusCode();
         }
+        public void Delete(int id, string endpoint)
+        {
+            HttpResponseMessage response =
+                client.DeleteAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
