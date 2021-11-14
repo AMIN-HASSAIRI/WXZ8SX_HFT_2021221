@@ -62,6 +62,7 @@ namespace WXZ8SX_HFT_2021221.Client
 
             var subMenuGetById = new ConsoleMenu()
                .Add(">> GET ALBUM BY ID", () => GetAlbumById())
+               .Add(">> GET GENRE BY ID", () => GetGenreById())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -398,6 +399,30 @@ namespace WXZ8SX_HFT_2021221.Client
                     album.AlbumId, album.AlbumName,
                     album.ReleasedDate, album.NumberOfSongs, album.Rating,
                     album.ArtistId, album.GenreId);
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void GetGenreById()
+        {
+            Console.WriteLine("\n::GET GENRE BY ID::\n");
+            Console.WriteLine("INSERT GENRE ID!");
+            int id = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-25}", "ID", "Genre Name");
+            Console.ResetColor();
+            try
+            {
+                var album = rest.GetSingle<Genre>($"genre/{id}");
+                string data = String.Format("{0,4} {1,-25}\n", album.GenreId, album.GenreName);
                 Console.WriteLine(data);
             }
             catch (InvalidOperationException ex)
