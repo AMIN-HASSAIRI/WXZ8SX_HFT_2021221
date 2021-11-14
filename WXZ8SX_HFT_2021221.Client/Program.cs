@@ -47,6 +47,7 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuList = new ConsoleMenu()
                .Add(">> LIST ALBUMS", () => GetAllAlbums())
                .Add(">> LIST GENRES", () => GetAllGenres())
+               .Add(">> LIST ARTISTS", () => GetAllArtists())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -320,6 +321,25 @@ namespace WXZ8SX_HFT_2021221.Client
             foreach (var item in allGenres)
             {
                 data += String.Format("{0,4} {1,-25}\n", item.GenreId, item.GenreName);
+            }
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
+        private static void GetAllArtists()
+        {
+            Console.WriteLine("\n::ALL ARTISTS::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
+                "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
+            Console.ResetColor();
+
+            var allArtists = rest.Get<Artist>("artist");
+            string data = "";
+            foreach (var item in allArtists)
+            {
+                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                    item.ArtistId, item.ArtistName, item.DateOfBirth, item.NumberOfAlbums);
             }
             Console.WriteLine(data);
 
