@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WXZ8SX_HFT_2021221.Data;
 using WXZ8SX_HFT_2021221.Logic;
+using WXZ8SX_HFT_2021221.Repository;
 
 namespace WXZ8SX_HFT_2021221.Endpoint
 {
@@ -21,9 +22,17 @@ namespace WXZ8SX_HFT_2021221.Endpoint
             services.AddControllers();
 
             services.AddTransient<IAlbumLogic, AlbumLogic>();
+            services.AddTransient<IAlbumRepository, AlbumRepository>();
+
             services.AddTransient<IGenreLogic, GenreLogic>();
+            services.AddTransient<IGenreRepository, GenreRepository>();
+
             services.AddTransient<ISongLogic, SongLogic>();
+            services.AddTransient<ISongRepository, SongRepository>();
+
             services.AddTransient<IArtistLogic, ArtistLogic>();
+            services.AddTransient<IArtistRepository, ArtistRepository>();
+
             services.AddTransient<MusicDbContext, MusicDbContext>();
 
         }
