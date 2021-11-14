@@ -64,6 +64,7 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET ALBUM BY ID", () => GetAlbumById())
                .Add(">> GET GENRE BY ID", () => GetGenreById())
                .Add(">> GET ARTIST BY ID", () => GetArtistById())
+               .Add(">> GET SONG BY ID", () => GetSongById()) //ERROR!!
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -450,6 +451,32 @@ namespace WXZ8SX_HFT_2021221.Client
                 var artist = rest.GetSingle<Artist>($"artist/{id}");
                 string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
                     artist.ArtistId, artist.ArtistName, artist.DateOfBirth, artist.NumberOfAlbums);
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void GetSongById()
+        {
+            Console.WriteLine("\n::GET SONG BY ID::\n");
+            Console.WriteLine("INSERT SONG ID!");
+            int id = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+                "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
+            Console.ResetColor();
+            try
+            {
+                var song = rest.GetSingle<Song>($"song/{id}");
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                    song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
                 Console.WriteLine(data);
             }
             catch (InvalidOperationException ex)
