@@ -1,5 +1,6 @@
 ﻿using ConsoleTools;
 using System;
+using System.Linq;
 using WXZ8SX_HFT_2021221.Models;
 
 namespace WXZ8SX_HFT_2021221.Client
@@ -42,6 +43,19 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
                });
+
+            var subMenuList = new ConsoleMenu()
+               .Add(">> LIST ALBUMS", () => GetAllAlbums())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
             //var menu = new ConsoleMenu(args, level: 0)
             //   .Add(">> GET ALBUMS", () => GetAlbums())
             //   .Add("Close", ConsoleMenu.Close)
@@ -55,7 +69,7 @@ namespace WXZ8SX_HFT_2021221.Client
             //       config.EnableBreadcrumb = true;
             //   });
 
-            subMenuCreate.Show();
+            subMenuList.Show();
             //menu.Show();
 
         }
@@ -194,6 +208,7 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         #endregion
 
+        #region DELETE METHODS
         private static void DeleteAlbum()
         {
             try
@@ -276,6 +291,30 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.ReadLine();
+        }
+        #endregion
+
+        private static void GetAllAlbums()
+        {
+            Console.WriteLine("\n::ALL ALBUMS::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
+                "ID","Album Name", "Date Of Release", "Number Of Songs", "Rating", 
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
+
+            var allAlbums = rest.Get<Album>("album");
+            string data = "";
+            foreach (var item in allAlbums)
+            {
+                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                    item.AlbumId, item.AlbumName,
+                    item.ReleasedDate, item.NumberOfSongs, item.Rating,
+                    item.ArtistId, item.GenreId);
+            }
+            Console.WriteLine(data);
+
             Console.ReadLine();
         }
     }
