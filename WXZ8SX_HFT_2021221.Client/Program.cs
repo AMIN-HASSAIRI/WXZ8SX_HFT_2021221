@@ -75,6 +75,19 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
                });
+
+            var subMenuUpdate = new ConsoleMenu()
+               .Add(">> UPDATE ALBUM", () => UpdateAlbum())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
             //var menu = new ConsoleMenu(args, level: 0)
             //   .Add(">> GET ALBUMS", () => GetAlbums())
             //   .Add("Close", ConsoleMenu.Close)
@@ -88,7 +101,7 @@ namespace WXZ8SX_HFT_2021221.Client
             //       config.EnableBreadcrumb = true;
             //   });
 
-            subMenuGetById.Show();
+            subMenuUpdate.Show();
             //menu.Show();
 
         }
@@ -384,6 +397,7 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         #endregion
 
+        #region GETBYID METHODS
         private static void GetAlbumById()
         {
             Console.WriteLine("\n::GET ALBUM BY ID::\n");
@@ -477,6 +491,58 @@ namespace WXZ8SX_HFT_2021221.Client
                 var song = rest.GetSingle<Song>($"song/{id}");
                 string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
                     song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        #endregion
+
+        private static void UpdateAlbum()
+        {
+            Console.WriteLine("\n::UPDATE ALBUM::\n");
+            Console.WriteLine("INSERT ALBUM ID TO BE UPDATED");
+            int id = int.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
+            try
+            {
+                var album = rest.GetSingle<Album>($"album/{id}");
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                    album.AlbumId, album.AlbumName,
+                    album.ReleasedDate, album.NumberOfSongs, album.Rating,
+                    album.ArtistId, album.GenreId);
+                Console.WriteLine(data);
+
+                Console.WriteLine("INSERT NEW NAME FOR THE ALBUM!");
+                album.AlbumName = Console.ReadLine();
+                Console.WriteLine("INSERT NEW DATE OF RELEASE OF THE ALBUM (MM/dd/yyyy)!");
+                album.ReleasedDate = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT NEW NUMBER OF SONGS OF THE ALBUM!");
+                album.NumberOfSongs = int.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT NEW RATING OF THE ALBUM!");
+                album.Rating = double.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT NEW ARTIST ID OF THE ALBUM!");
+                album.ArtistId = int.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT NEW GENRE ID OF THE ALBUM!");
+                album.GenreId = int.Parse(Console.ReadLine());
+                rest.Put<Album>(album, "album");
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
+                    "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
+                    "Artist ID", "Genre ID");
+                Console.ResetColor();
                 Console.WriteLine(data);
             }
             catch (InvalidOperationException ex)
