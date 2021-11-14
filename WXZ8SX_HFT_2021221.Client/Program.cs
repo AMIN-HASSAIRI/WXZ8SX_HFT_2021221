@@ -32,7 +32,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetAlbums()
         {
-            rest.Get<Album>("album");
+            var allAlbums = rest.Get<Album>("album");
+            foreach (var item in allAlbums)
+            {
+                Console.WriteLine(item.AlbumName);
+            }
         }
     }
 }
