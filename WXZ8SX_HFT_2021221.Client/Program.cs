@@ -78,6 +78,7 @@ namespace WXZ8SX_HFT_2021221.Client
 
             var subMenuUpdate = new ConsoleMenu()
                .Add(">> UPDATE ALBUM", () => UpdateAlbum())
+               .Add(">> UPDATE GENRE", () => UpdateGenre())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -544,6 +545,42 @@ namespace WXZ8SX_HFT_2021221.Client
                     "Artist ID", "Genre ID");
                 Console.ResetColor();
                 Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void UpdateGenre()
+        {
+            Console.WriteLine("\n::UPDATE GENRE::\n");
+            Console.WriteLine("INSERT GENRE ID TO BE UPDATED");
+            try
+            {
+                int id = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-25}", "ID", "Genre Name");
+                Console.ResetColor();
+
+                var genre = rest.GetSingle<Genre>($"genre/{id}");
+                string data = String.Format("{0,4} {1,-25}\n", genre.GenreId, genre.GenreName);
+                Console.WriteLine(data);
+
+                Console.WriteLine("INSERT NEW NAME FOR THE GENRE!");
+                string newName = Console.ReadLine();
+                genre.GenreName = newName;
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-25}", "ID", "Genre Name");
+                Console.ResetColor();
+                data = String.Format("{0,4} {1,-25}\n", genre.GenreId, genre.GenreName);
+                Console.WriteLine(data);
+
+                Console.ReadLine();
             }
             catch (InvalidOperationException ex)
             {
