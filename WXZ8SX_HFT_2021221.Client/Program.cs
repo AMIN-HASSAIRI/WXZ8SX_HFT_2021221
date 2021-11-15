@@ -162,6 +162,7 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET ALBUM NAME OF SONG BY SONG ID", () => GetAlbumNameOfSong())
                .Add(">> GET DATE OF BIRTH OF SINGER BY SONG ID", () => GetDateOfBirthOfSinger())
                .Add(">> GET THE LONGEST SONG", () => GetLongestSong())
+               .Add(">> GET THE SHORTEST SONG", () => GetShortestSong())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -1206,6 +1207,21 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.ResetColor();
 
             var song = rest.GetSingle<Song>($"statsong/getlongestsong");
+            string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                    song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
+
+            Console.WriteLine(data);
+            Console.ReadLine();
+        }
+        private static void GetShortestSong()
+        {
+            Console.WriteLine("\n::GET THE SHORTEST SONG::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+                "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
+            Console.ResetColor();
+
+            var song = rest.GetSingle<Song>($"statsong/getshortestsong");
             string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
                     song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
 
