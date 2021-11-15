@@ -113,6 +113,7 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET ALBUMS BY ARTIST ID", () => GetAlbumsByArtistId())
                .Add(">> GET ALBUMS BY YEAR", () => GetAlbumsByYear())
                .Add(">> GET BEST ALBUMS ", () => GetBestAlbums())
+               .Add(">> GET THE LONGEST ALBUM ", () => GetTheLongestAlbum())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -815,6 +816,27 @@ namespace WXZ8SX_HFT_2021221.Client
                     item.ReleasedDate, item.NumberOfSongs, item.Rating,
                     item.ArtistId, item.GenreId);
             }
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
+        private static void GetTheLongestAlbum()
+        {
+            Console.WriteLine("\n::GET THE LONGEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
+
+            var album = rest.GetSingle<Album>($"statalbum/getthelongestalbum");
+
+
+            String data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
+                    album.AlbumId, album.AlbumName,
+                    album.ReleasedDate, album.NumberOfSongs, album.Length, album.Rating,
+                    album.ArtistId, album.GenreId);
+            
             Console.WriteLine(data);
 
             Console.ReadLine();
