@@ -111,6 +111,7 @@ namespace WXZ8SX_HFT_2021221.Client
 
             var subMenuAlbumNonCRUD = new ConsoleMenu()
                .Add(">> GET ALBUMS BY ARTIST ID", () => GetAlbumsByArtistId())
+               .Add(">> GET ALBUMS BY YEAR", () => GetAlbumsByYear())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -756,10 +757,44 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 Console.WriteLine(ex.Message);
             }
-
             Console.ReadLine();
         }
+        private static void GetAlbumsByYear()
+        {
+            Console.WriteLine("\n::ALBUMS BY YEAR::\n");
+            Console.WriteLine("INSERT THE YEAR (yyyy)!");
+            try
+            {
+                int yyyy = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
+                    "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
+                    "Artist ID", "Genre ID");
+                Console.ResetColor();
 
+                var albums = rest.Get<Album>($"statalbum/getalbumsbyyear/{yyyy}");
+                string data = "";
+                foreach (var item in albums)
+                {
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                        item.AlbumId, item.AlbumName,
+                        item.ReleasedDate, item.NumberOfSongs, item.Rating,
+                        item.ArtistId, item.GenreId);
+                }
+                Console.WriteLine(data);
+
+                Console.ReadLine();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
 
         #endregion
     }
