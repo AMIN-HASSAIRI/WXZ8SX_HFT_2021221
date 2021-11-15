@@ -79,6 +79,7 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuUpdate = new ConsoleMenu()
                .Add(">> UPDATE ALBUM", () => UpdateAlbum())
                .Add(">> UPDATE GENRE", () => UpdateGenre())
+               .Add(">> UPDATE ARTIST", () => UpdateArtist())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -591,6 +592,45 @@ namespace WXZ8SX_HFT_2021221.Client
                 Console.WriteLine(ex.Message);
             }
             Console.ReadLine();
+        }
+        private static void UpdateArtist()
+        {
+            Console.WriteLine("\n::UPDATE ARTIST::\n");
+            Console.WriteLine("INSERT ARTIST ID TO BE UPDATED");
+            try
+            {
+                int id = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
+                                 "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
+                Console.ResetColor();
+
+                var artist = rest.GetSingle<Artist>($"artist/{id}");
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                    artist.ArtistId, artist.ArtistName, artist.DateOfBirth, artist.NumberOfAlbums);
+                Console.WriteLine(data);
+
+                Console.WriteLine("INSERT NEW NAME FOR THE ARTIST!");
+                string newName = Console.ReadLine();
+                artist.ArtistName = newName;
+                Console.WriteLine("INSERT NEW DATE OF BIRTH OF THE ARTIST (MM/dd/yyyy)!");
+                DateTime newDate = DateTime.Parse(Console.ReadLine());
+                artist.DateOfBirth = newDate;
+                Console.WriteLine("INSERT NEW NUMBER OF ALBUMS!");
+                int newNum = int.Parse(Console.ReadLine());
+                artist.NumberOfAlbums = newNum;
+
+                data = String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                    artist.ArtistId, artist.ArtistName, artist.DateOfBirth, artist.NumberOfAlbums);
+                Console.WriteLine(data);
+
+                Console.ReadLine();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
