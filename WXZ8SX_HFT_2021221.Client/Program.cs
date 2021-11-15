@@ -144,7 +144,7 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuArtistNonCRUD =new ConsoleMenu()
                .Add(">> GET ALBUM NAME BY ARTIST ID", () => GetAlbumNameByArtistId())
                .Add(">> GET ALBUMS OF ARTIST", () => GetAlbumsOfArtist())
-               .Add(">> GET ARTIST", () => GetArtist())
+               .Add(">> GET ARTISTS ORDERED BY DATE OF BIRTH", () => GetArtistsOrderedByBirthDate())
 
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
@@ -1036,23 +1036,27 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             Console.ReadLine();
         }
-        private static void GetArtist()
+        private static void GetArtistsOrderedByBirthDate()
         {
-            Console.WriteLine("\n::GET ARTIST::");
-            Console.WriteLine("INSERT ARTIST ID!");
+            Console.WriteLine("\n::GET ARTISTS ORDERED BY DATE OF BIRTH::");
             try
             {
-                int id = int.Parse(Console.ReadLine());
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
                     "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
                 Console.ResetColor();
 
-                var artist = rest.GetSingle<Artist>($"statartist/getartist/{id}");
+                var artists = rest.Get<Artist>($"statartist/getartistsorderedbybirthdate");
 
-                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
-                    artist.ArtistId, artist.ArtistName, artist.DateOfBirth, artist.NumberOfAlbums);
+                string data = "";
+                foreach (var item in artists)
+                {
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                        item.ArtistId, item.ArtistName, item.DateOfBirth, item.NumberOfAlbums);
+                }
                 Console.WriteLine(data);
+
+                Console.ReadLine();
             }
             catch (InvalidOperationException ex)
             {

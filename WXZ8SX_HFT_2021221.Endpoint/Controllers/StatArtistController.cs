@@ -33,20 +33,6 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             return _artistLogic.GetAlbumsOfArtist(id);
         }
 
-        // GET statartist/getartist/4
-        [HttpGet("{id}")]
-        public Artist GetArtist(int id)
-        {
-            return _artistLogic.GetArtist(id);
-        }
-
-        // GET statartist/getartists
-        [HttpGet]
-        public IEnumerable<Artist> GetArtists()
-        {
-            return _artistLogic.GetArtists();
-        }
-
         // GET statartist/getartistsorderedbybirthdate
         [HttpGet]
         public IEnumerable<Artist> GetArtistsOrderedByBirthDate()
