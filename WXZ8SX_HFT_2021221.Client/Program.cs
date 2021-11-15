@@ -165,6 +165,7 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET THE SHORTEST SONG", () => GetShortestSong())
                .Add(">> GET ALL SONGS ORDERED BY LENGTH", () => GetSongsOrderedByLength())
                .Add(">> GET ALL SONGS ORDERED BY NAME", () => GetSongsOrderedByName())
+               .Add(">> GET WRITER NAME OF SONG BY SONG ID", () => GetWriterNameOfSong())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -1264,6 +1265,26 @@ namespace WXZ8SX_HFT_2021221.Client
                     item.SongId, item.Name, item.Length, item.Writer, item.Singer, item.AlbumId);
             }
             Console.WriteLine(data);
+            Console.ReadLine();
+        }
+        private static void GetWriterNameOfSong()
+        {
+            Console.WriteLine("\n::GET WRITER NAME OF SONG BY SONG ID::\n");
+            try
+            {
+                Console.WriteLine("INSERT SONG ID");
+                int id = int.Parse(Console.ReadLine());
+                var writerName = rest.GetSingle<string>($"statsong/getwriternameofsong/{id}");
+                Console.WriteLine($"WRITER NAME IS: {writerName}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         }
         #endregion
