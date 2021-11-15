@@ -19,7 +19,7 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             _genreLogic = genreLogic;
         }
 
-        // GET statgenre/4
+        // GET statgenre/getallalbumswithgenre/4
         [HttpGet("{id}")]
         public IEnumerable<Album> GetAllAlbumsWithGenre(int id)
         {

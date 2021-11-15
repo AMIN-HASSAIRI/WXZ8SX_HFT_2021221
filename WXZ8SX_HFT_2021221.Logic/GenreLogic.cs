@@ -39,12 +39,12 @@ namespace WXZ8SX_HFT_2021221.Logic
         public IEnumerable<Album> GetAllAlbumsWithGenre(int genreId)
         {
             var genre = _genreRepository.GetOne(genreId);
-            if (genre == null)
+            if (genre.GenreName == null)
             {
                 throw new Exception($"Invalid genre ID: {genreId}");
             }
             List<Album> albumsGenre = new List<Album>();
-            var albums = _albumRepository.GetAll().Where(album => album.GenreId == genre.GenreId);
+            var albums = _albumRepository.GetAll().Where(album => album.GenreId == genreId);
             foreach (Album al in albums)
             {
                 albumsGenre.Add(al);

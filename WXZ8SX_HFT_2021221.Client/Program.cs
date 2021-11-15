@@ -127,6 +127,20 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
                });
+
+            var subMenuGenreNonCRUD = new ConsoleMenu()
+               .Add(">> GET ALL ALBUMS WITH GENRE", () => GetAllAlbumsWithGenre())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
+
             //var menu = new ConsoleMenu(args, level: 0)
             //   .Add(">> GET ALBUMS", () => GetAlbums())
             //   .Add("Close", ConsoleMenu.Close)
@@ -140,7 +154,7 @@ namespace WXZ8SX_HFT_2021221.Client
             //       config.EnableBreadcrumb = true;
             //   });
 
-            subMenuAlbumNonCRUD.Show();
+            subMenuGenreNonCRUD.Show();
             //menu.Show();
 
         }
@@ -909,6 +923,44 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.WriteLine(data);
 
             Console.ReadLine();
+        }
+        #endregion
+
+        #region NONCRUD GENRE METHODS
+        private static void GetAllAlbumsWithGenre()
+        {
+            Console.WriteLine("\n::GET ALL ALBUMS WITH GENRE::\n");
+            try
+            {
+                Console.WriteLine("INSERT GENRE ID!");
+                int id = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
+                Console.ResetColor();
+
+                var albums = rest.Get<Album>($"statgenre/getallalbumswithgenre/{id}");
+                string data = "";
+                foreach (var item in albums)
+                {
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
+                        item.AlbumId, item.AlbumName,
+                        item.ReleasedDate, item.NumberOfSongs, item.Length ,item.Rating,
+                        item.ArtistId, item.GenreId);
+                }
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+
         }
         #endregion
     }
