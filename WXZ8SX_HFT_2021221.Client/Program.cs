@@ -163,6 +163,7 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET DATE OF BIRTH OF SINGER BY SONG ID", () => GetDateOfBirthOfSinger())
                .Add(">> GET THE LONGEST SONG", () => GetLongestSong())
                .Add(">> GET THE SHORTEST SONG", () => GetShortestSong())
+               .Add(">> GET ALL SONGS ORDERED BY LENGTH", () => GetSongsOrderedByLength())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -1225,6 +1226,24 @@ namespace WXZ8SX_HFT_2021221.Client
             string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
                     song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
 
+            Console.WriteLine(data);
+            Console.ReadLine();
+        }
+        private static void GetSongsOrderedByLength()
+        {
+            Console.WriteLine("\n::GET ALL SONGS ORDERED BY LENGTH::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+                "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
+            Console.ResetColor();
+
+            var songs = rest.Get<Song>($"statsong/getsongsorderedbylength");
+            string data = "";
+            foreach (var item in songs)
+            {
+                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                    item.SongId, item.Name, item.Length, item.Writer, item.Singer, item.AlbumId);
+            }
             Console.WriteLine(data);
             Console.ReadLine();
         }
