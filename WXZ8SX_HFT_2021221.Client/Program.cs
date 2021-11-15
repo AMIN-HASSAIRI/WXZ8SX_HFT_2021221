@@ -115,6 +115,8 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET BEST ALBUMS ", () => GetBestAlbums())
                .Add(">> GET THE LONGEST ALBUM ", () => GetTheLongestAlbum())
                .Add(">> GET THE NEWEST ALBUM ", () => GetTheNewestAlbum())
+               .Add(">> GET THE OLDEST ALBUM ", () => GetTheOldestAlbum())
+               .Add(">> GET THE SHORTEST ALBUM ", () => GetTheShortestAlbum())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -866,7 +868,48 @@ namespace WXZ8SX_HFT_2021221.Client
 
             Console.ReadLine();
         }
+        private static void GetTheOldestAlbum()
+        {
+            Console.WriteLine("\n::GET THE OLDEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
 
+            var album = rest.GetSingle<Album>($"statalbum/gettheoldestalbum");
+
+
+            String data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
+                    album.AlbumId, album.AlbumName,
+                    album.ReleasedDate, album.NumberOfSongs, album.Length, album.Rating,
+                    album.ArtistId, album.GenreId);
+
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
+        private static void GetTheShortestAlbum()
+        {
+            Console.WriteLine("\n::GET THE SHORTEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
+
+            var album = rest.GetSingle<Album>($"statalbum/gettheshortestalbum");
+
+
+            String data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
+                    album.AlbumId, album.AlbumName,
+                    album.ReleasedDate, album.NumberOfSongs, album.Length, album.Rating,
+                    album.ArtistId, album.GenreId);
+
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
         #endregion
     }
 }
