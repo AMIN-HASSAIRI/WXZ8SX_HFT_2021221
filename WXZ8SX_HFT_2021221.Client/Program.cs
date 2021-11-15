@@ -144,6 +144,7 @@ namespace WXZ8SX_HFT_2021221.Client
             var subMenuArtistNonCRUD =new ConsoleMenu()
                .Add(">> GET ALBUM NAME BY ARTIST ID", () => GetAlbumNameByArtistId())
                .Add(">> GET ALBUMS OF ARTIST", () => GetAlbumsOfArtist())
+               .Add(">> GET ARTIST", () => GetArtist())
 
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
@@ -1034,7 +1035,34 @@ namespace WXZ8SX_HFT_2021221.Client
                 Console.WriteLine(ex.Message);
             }
             Console.ReadLine();
+        }
+        private static void GetArtist()
+        {
+            Console.WriteLine("\n::GET ARTIST::");
+            Console.WriteLine("INSERT ARTIST ID!");
+            try
+            {
+                int id = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
+                    "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
+                Console.ResetColor();
 
+                var artist = rest.GetSingle<Artist>($"statartist/getartist/{id}");
+
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                    artist.ArtistId, artist.ArtistName, artist.DateOfBirth, artist.NumberOfAlbums);
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
         }
     }
 }
