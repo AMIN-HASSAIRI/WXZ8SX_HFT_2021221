@@ -19,49 +19,49 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             _albumLogic = albumLogic;
         }
 
-        // GET stat/getalbumsbyartist/4
+        // GET statalbum/getalbumsbyartist/4
         [HttpGet("{id}")]
         public IEnumerable<Album> GetAlbumsByArtist(int id)
         {
             return _albumLogic.GetAlbumsByArtist(id);
         }
 
-        // GET stat/getalbumsbyyear/2002
+        // GET statalbum/getalbumsbyyear/2002
         [HttpGet("{YYYY}")]
         public IEnumerable<Album> GetAlbumsByYear(string YYYY)
         {
             return _albumLogic.GetAlbumsByYear(YYYY);
         }
 
-        // GET stat/getbestalbums
+        // GET statalbum/getbestalbums
         [HttpGet]
         public IEnumerable<Album> GetBestAlbums()
         {
             return _albumLogic.GetBestAlbums();
         }
 
-        // GET stat/getthelongestalbum
+        // GET statalbum/getthelongestalbum
         [HttpGet]
         public Album GetTheLongestAlbum()
         {
             return _albumLogic.GetTheLongestAlbum();
         }
 
-        // GET stat/getthenewestalbum
+        // GET statalbum/getthenewestalbum
         [HttpGet]
         public Album GetTheNewestAlbum()
         {
             return _albumLogic.GetTheNewestAlbum();
         }
 
-        // GET stat/gettheoldestalbum
+        // GET statalbum/gettheoldestalbum
         [HttpGet]
         public Album GetTheOldestAlbum()
         {
             return _albumLogic.GetTheOldestAlbum();
         }
 
-        // GET stat/gettheshortestalbum
+        // GET statalbum/gettheshortestalbum
         [HttpGet]
         public Album GetTheShortestAlbum()
         {
