@@ -145,7 +145,8 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET ALBUM NAME BY ARTIST ID", () => GetAlbumNameByArtistId())
                .Add(">> GET ALBUMS OF ARTIST", () => GetAlbumsOfArtist())
                .Add(">> GET ARTISTS ORDERED BY DATE OF BIRTH", () => GetArtistsOrderedByBirthDate())
-
+               .Add(">> GET ARTISTS ORDERED BY BY NAME", () => GetArtistsOrderedByName())
+               .Add(">> GET ARTISTS ORDERED BY NUMBER OF ALBUMS", () => GetArtistsOrderedByNumOfAlbums())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -1001,7 +1002,6 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             Console.ReadLine();
         }
-        #endregion
         private static void GetAlbumsOfArtist()
         {
             Console.WriteLine("\n::GET ALBUMS OF ARTIST::\n");
@@ -1068,5 +1068,71 @@ namespace WXZ8SX_HFT_2021221.Client
             }
             Console.ReadLine();
         }
+        private static void GetArtistsOrderedByName()
+        {
+            Console.WriteLine("\n::GET ARTISTS ORDERED BY NAME::");
+            try
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
+                    "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
+                Console.ResetColor();
+
+                var artists = rest.Get<Artist>($"statartist/getartistsorderedbyname");
+
+                string data = "";
+                foreach (var item in artists)
+                {
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                        item.ArtistId, item.ArtistName, item.DateOfBirth, item.NumberOfAlbums);
+                }
+                Console.WriteLine(data);
+
+                Console.ReadLine();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void GetArtistsOrderedByNumOfAlbums()
+        {
+            Console.WriteLine("\n::GET ARTISTS ORDERED BY NUMBER OF ALBUMS::");
+            try
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
+                    "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
+                Console.ResetColor();
+
+                var artists = rest.Get<Artist>($"statartist/getartistsorderedbynumofalbums");
+
+                string data = "";
+                foreach (var item in artists)
+                {
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20}\n",
+                        item.ArtistId, item.ArtistName, item.DateOfBirth, item.NumberOfAlbums);
+                }
+                Console.WriteLine(data);
+
+                Console.ReadLine();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        #endregion
+
     }
 }
