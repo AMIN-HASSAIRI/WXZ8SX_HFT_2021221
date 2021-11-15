@@ -114,6 +114,7 @@ namespace WXZ8SX_HFT_2021221.Client
                .Add(">> GET ALBUMS BY YEAR", () => GetAlbumsByYear())
                .Add(">> GET BEST ALBUMS ", () => GetBestAlbums())
                .Add(">> GET THE LONGEST ALBUM ", () => GetTheLongestAlbum())
+               .Add(">> GET THE NEWEST ALBUM ", () => GetTheNewestAlbum())
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
@@ -154,6 +155,8 @@ namespace WXZ8SX_HFT_2021221.Client
                 DateTime date = DateTime.Parse(Console.ReadLine());
                 Console.WriteLine("INSERT NUMBER OF SONGS OF THE ALBUM!");
                 int num = int.Parse(Console.ReadLine());
+                Console.WriteLine("INSERT THE LENGTH OF THE ALBUM!");
+                double length = double.Parse(Console.ReadLine());
                 Console.WriteLine("INSERT THE RATING OF ALBUM (MUST BE BETWEEN 0.0 AND 5.0)!");
                 double rating = double.Parse(Console.ReadLine());
                 Console.WriteLine("INSERT ARTIST ID!");
@@ -165,6 +168,7 @@ namespace WXZ8SX_HFT_2021221.Client
                     AlbumName = name,
                     ReleasedDate = date,
                     NumberOfSongs = num,
+                    Length = length,
                     Rating = rating,
                     ArtistId = artId,
                     GenreId = genId,
@@ -358,8 +362,8 @@ namespace WXZ8SX_HFT_2021221.Client
         {
             Console.WriteLine("\n::ALL ALBUMS::\n");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
-                "ID","Album Name", "Date Of Release", "Number Of Songs", "Rating", 
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
                 "Artist ID", "Genre ID");
             Console.ResetColor();
 
@@ -367,7 +371,7 @@ namespace WXZ8SX_HFT_2021221.Client
             string data = "";
             foreach (var item in allAlbums)
             {
-                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                     item.AlbumId, item.AlbumName,
                     item.ReleasedDate, item.NumberOfSongs, item.Rating,
                     item.ArtistId, item.GenreId);
@@ -735,8 +739,8 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 int id = int.Parse(Console.ReadLine());
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
-                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
                 "Artist ID", "Genre ID");
                 Console.ResetColor();
 
@@ -744,7 +748,7 @@ namespace WXZ8SX_HFT_2021221.Client
                 string data = "";
                 foreach (var item in Albums)
                 {
-                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                         item.AlbumId, item.AlbumName,
                         item.ReleasedDate, item.NumberOfSongs, item.Rating,
                         item.ArtistId, item.GenreId);
@@ -769,16 +773,16 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 int yyyy = int.Parse(Console.ReadLine());
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
-                    "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
-                    "Artist ID", "Genre ID");
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
                 Console.ResetColor();
 
                 var albums = rest.Get<Album>($"statalbum/getalbumsbyyear/{yyyy}");
                 string data = "";
                 foreach (var item in albums)
                 {
-                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                         item.AlbumId, item.AlbumName,
                         item.ReleasedDate, item.NumberOfSongs, item.Rating,
                         item.ArtistId, item.GenreId);
@@ -802,8 +806,8 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.WriteLine("\n::GET BEST ALBUMS::\n");
 
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
-                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
                 "Artist ID", "Genre ID");
             Console.ResetColor();
 
@@ -811,7 +815,7 @@ namespace WXZ8SX_HFT_2021221.Client
             string data = "";
             foreach (var item in albums)
             {
-                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                     item.AlbumId, item.AlbumName,
                     item.ReleasedDate, item.NumberOfSongs, item.Rating,
                     item.ArtistId, item.GenreId);
@@ -837,6 +841,27 @@ namespace WXZ8SX_HFT_2021221.Client
                     album.ReleasedDate, album.NumberOfSongs, album.Length, album.Rating,
                     album.ArtistId, album.GenreId);
             
+            Console.WriteLine(data);
+
+            Console.ReadLine();
+        }
+        private static void GetTheNewestAlbum()
+        {
+            Console.WriteLine("\n::GET THE NEWEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
+            Console.ResetColor();
+
+            var album = rest.GetSingle<Album>($"statalbum/getthenewestalbum");
+
+
+            String data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
+                    album.AlbumId, album.AlbumName,
+                    album.ReleasedDate, album.NumberOfSongs, album.Length, album.Rating,
+                    album.ArtistId, album.GenreId);
+
             Console.WriteLine(data);
 
             Console.ReadLine();
