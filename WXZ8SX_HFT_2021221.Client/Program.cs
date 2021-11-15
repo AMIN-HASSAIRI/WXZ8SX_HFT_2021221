@@ -27,7 +27,7 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
                });
-            
+
             var subMenuDelete = new ConsoleMenu()
                .Add(">> DELETE ALBUM", () => DeleteAlbum())
                .Add(">> DELETE GENRE", () => DeleteGenre())
@@ -141,7 +141,7 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableBreadcrumb = true;
                });
 
-            var subMenuArtistNonCRUD =new ConsoleMenu()
+            var subMenuArtistNonCRUD = new ConsoleMenu()
                .Add(">> GET ALBUM NAME BY ARTIST ID", () => GetAlbumNameByArtistId())
                .Add(">> GET ALBUMS OF ARTIST", () => GetAlbumsOfArtist())
                .Add(">> GET ARTISTS ORDERED BY DATE OF BIRTH", () => GetArtistsOrderedByBirthDate())
@@ -158,6 +158,20 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableBreadcrumb = true;
                });
 
+            var subMenuSongNonCRUD = new ConsoleMenu()
+               .Add(">> GET ALBUM NAME OF SONG BY SONG ID", () => GetAlbumNameOfSong())
+               .Add(">> GET DATE OF BIRTH OF SINGER BY SONG ID", () => GetDateOfBirthOfSinger())
+               .Add(">> GET THE LONGEST SONG", () => GetLongestSong())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
             //var menu = new ConsoleMenu(args, level: 0)
             //   .Add(">> GET ALBUMS", () => GetAlbums())
             //   .Add("Close", ConsoleMenu.Close)
@@ -196,7 +210,7 @@ namespace WXZ8SX_HFT_2021221.Client
                 int artId = int.Parse(Console.ReadLine());
                 Console.WriteLine("INSERT GENRE ID!");
                 int genId = int.Parse(Console.ReadLine());
-                rest.Post<Album>(new Album() 
+                rest.Post<Album>(new Album()
                 {
                     AlbumName = name,
                     ReleasedDate = date,
@@ -454,7 +468,7 @@ namespace WXZ8SX_HFT_2021221.Client
             Console.WriteLine("\n::ALL SONGS::\n");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
-                "ID", "Song Name", "Length","Writer","Singer","Album ID");
+                "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
             Console.ResetColor();
 
             var allSongs = rest.Get<Song>("song");
@@ -873,7 +887,7 @@ namespace WXZ8SX_HFT_2021221.Client
                     album.AlbumId, album.AlbumName,
                     album.ReleasedDate, album.NumberOfSongs, album.Length, album.Rating,
                     album.ArtistId, album.GenreId);
-            
+
             Console.WriteLine(data);
 
             Console.ReadLine();
@@ -963,7 +977,7 @@ namespace WXZ8SX_HFT_2021221.Client
                 {
                     data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                         item.AlbumId, item.AlbumName,
-                        item.ReleasedDate, item.NumberOfSongs, item.Length ,item.Rating,
+                        item.ReleasedDate, item.NumberOfSongs, item.Length, item.Rating,
                         item.ArtistId, item.GenreId);
                 }
                 Console.WriteLine(data);
@@ -1134,5 +1148,70 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         #endregion
 
+        #region NONCRUD SONG METHODS
+        private static void GetAlbumNameOfSong()
+        {
+            Console.WriteLine("\n::GET ALBUM NAME OF SONG BY SONG ID::\n");
+            try
+            {
+                int id = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+                    "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
+                Console.ResetColor();
+
+                var song = rest.GetSingle<Song>($"statsong/getalbumnameofsong/{id}");
+                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                        song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
+
+                Console.WriteLine(data);
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void GetDateOfBirthOfSinger()
+        {
+            Console.WriteLine("\n::GET DATE OF BIRTH OF SINGER BY SONG ID::\n");
+            try
+            {
+                Console.WriteLine("INSERT SONG ID!");
+                int id = int.Parse(Console.ReadLine());
+                var dateOfBirth = rest.GetSingle<DateTime>($"statsong/getdateofbirthofsinger/{id}");
+                Console.WriteLine($"DATE OF BIRTH IS: {dateOfBirth}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        private static void GetLongestSong()
+        {
+            Console.WriteLine("\n::GET THE LONGEST SONG::\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+                "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
+            Console.ResetColor();
+
+            var song = rest.GetSingle<Song>($"statsong/getlongestsong");
+            string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                    song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
+
+            Console.WriteLine(data);
+            Console.ReadLine();
+        }
+        #endregion
     }
 }
