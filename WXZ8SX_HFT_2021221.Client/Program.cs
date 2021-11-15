@@ -141,6 +141,21 @@ namespace WXZ8SX_HFT_2021221.Client
                    config.EnableBreadcrumb = true;
                });
 
+            var subMenuArtistNonCRUD =new ConsoleMenu()
+               .Add(">> GET ALBUM NAME BY ARTIST ID", () => GetAlbumNameByArtistId())
+               .Add(">> GET ALBUMS OF ARTIST", () => GetAlbumsOfArtist())
+
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Main menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+               });
+
             //var menu = new ConsoleMenu(args, level: 0)
             //   .Add(">> GET ALBUMS", () => GetAlbums())
             //   .Add("Close", ConsoleMenu.Close)
@@ -154,7 +169,7 @@ namespace WXZ8SX_HFT_2021221.Client
             //       config.EnableBreadcrumb = true;
             //   });
 
-            subMenuGenreNonCRUD.Show();
+            subMenuArtistNonCRUD.Show();
             //menu.Show();
 
         }
@@ -766,7 +781,7 @@ namespace WXZ8SX_HFT_2021221.Client
                 {
                     data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                         item.AlbumId, item.AlbumName,
-                        item.ReleasedDate, item.NumberOfSongs, item.Rating,
+                        item.ReleasedDate, item.NumberOfSongs, item.Length, item.Rating,
                         item.ArtistId, item.GenreId);
                 }
                 Console.WriteLine(data);
@@ -963,5 +978,63 @@ namespace WXZ8SX_HFT_2021221.Client
 
         }
         #endregion
+
+        #region NONCRUD ARTIST METHODS
+        private static void GetAlbumNameByArtistId()
+        {
+            Console.WriteLine("\n::GET ALBUM NAME BY ARTIST ID::\n");
+            Console.WriteLine("INSERT ARTIST ID!");
+            try
+            {
+                int id = int.Parse(Console.ReadLine());
+                string albumName = rest.GetSingle<string>($"statartist/getalbumnamebyartistid/{id}");
+                Console.WriteLine($"ALBUM NAME: {albumName}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+        }
+        #endregion
+        private static void GetAlbumsOfArtist()
+        {
+            Console.WriteLine("\n::GET ALBUMS OF ARTIST::\n");
+            Console.WriteLine("INSERT ARTIST ID!");
+            try
+            {
+                int id = int.Parse(Console.ReadLine());
+                var albums = rest.Get<Album>($"statartist/getalbumsofartist/{id}");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
+                "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
+                "Artist ID", "Genre ID");
+                Console.ResetColor();
+
+                string data = "";
+                foreach (var item in albums)
+                {
+                    data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
+                        item.AlbumId, item.AlbumName,
+                        item.ReleasedDate, item.NumberOfSongs, item.Length, item.Rating,
+                        item.ArtistId, item.GenreId);
+                }
+                Console.WriteLine(data);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadLine();
+
+        }
     }
 }
