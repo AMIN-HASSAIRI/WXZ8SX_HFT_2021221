@@ -98,10 +98,11 @@ namespace WXZ8SX_HFT_2021221.Logic
         public IEnumerable<Album> GetBestAlbums()
         {
             List<Album> bestAlbums = new List<Album>();
+            var max = _albumRepository.GetAll().OrderByDescending(x => x.Rating).First().Rating;
 
-            var albums = _albumRepository.GetAll().OrderByDescending(album => album.Rating).GroupBy(album => album.Rating).First();
+            var albums = _albumRepository.GetAll().Where(x => x.Rating == (double)max).ToList();
 
-            foreach (Album album in albums)
+            foreach (var album in albums)
             {
                 bestAlbums.Add(album);
             }
