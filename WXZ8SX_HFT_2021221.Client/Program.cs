@@ -12,6 +12,9 @@ namespace WXZ8SX_HFT_2021221.Client
         static void Main(string[] args)
         {
             System.Threading.Thread.Sleep(8000);
+
+            #region SUB-MENU CRUD
+
             var subMenuCreate = new ConsoleMenu()
                .Add(">> CREATE ALBUM", () => CreateAlbum())
                .Add(">> CREATE GENRE", () => CreateGenre())
@@ -23,9 +26,10 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuDelete = new ConsoleMenu()
@@ -39,41 +43,44 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuList = new ConsoleMenu()
                .Add(">> LIST ALBUMS", () => GetAllAlbums())
                .Add(">> LIST GENRES", () => GetAllGenres())
                .Add(">> LIST ARTISTS", () => GetAllArtists())
-               .Add(">> LIST SONGS", () => GetAllSongs()) //ERROR!!
+               .Add(">> LIST SONGS", () => GetAllSongs()) 
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuGetById = new ConsoleMenu()
                .Add(">> GET ALBUM BY ID", () => GetAlbumById())
                .Add(">> GET GENRE BY ID", () => GetGenreById())
                .Add(">> GET ARTIST BY ID", () => GetArtistById())
-               .Add(">> GET SONG BY ID", () => GetSongById()) //ERROR!!
+               .Add(">> GET SONG BY ID", () => GetSongById()) 
                .Add("Close", ConsoleMenu.Close)
                .Add("Exit", () => Environment.Exit(0))
                .Configure(config =>
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuUpdate = new ConsoleMenu()
@@ -87,10 +94,14 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
+
+            #endregion
+
 
             var subMenuCRUD = new ConsoleMenu()
                .Add(">> C - CREATE", () => subMenuCreate.Show())
@@ -104,11 +115,13 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
+            #region SUB-MENU NON CRUD
             var subMenuAlbumNonCRUD = new ConsoleMenu()
                .Add(">> GET ALBUMS BY ARTIST ID", () => GetAlbumsByArtistId())
                .Add(">> GET ALBUMS BY YEAR", () => GetAlbumsByYear())
@@ -123,9 +136,10 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuGenreNonCRUD = new ConsoleMenu()
@@ -136,9 +150,10 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuArtistNonCRUD = new ConsoleMenu()
@@ -153,9 +168,10 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
-                   config.Title = "Main menu";
+                   config.Title = "Sub menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
 
             var subMenuSongNonCRUD = new ConsoleMenu()
@@ -172,34 +188,57 @@ namespace WXZ8SX_HFT_2021221.Client
                {
                    config.Selector = "--> ";
                    config.EnableFilter = true;
+                   config.Title = "Sub menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
+               });
+            #endregion
+
+            var subMenuNonCRUD = new ConsoleMenu()
+               .Add(">> ALBUM NON CRUD FUNCTIONALITIES", () => subMenuAlbumNonCRUD.Show())
+               .Add(">> GENRE NON CRUD FUNCTIONALITIES", () => subMenuGenreNonCRUD.Show())
+               .Add(">> ARTIST NON CRUD FUNCTIONALITIES", () => subMenuArtistNonCRUD.Show())
+               .Add(">> SONG NON CRUD FUNCTIONALITIES", () => subMenuSongNonCRUD.Show())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
+                   config.Title = "Sub menu";
+                   config.EnableWriteTitle = true;
+                   config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
+               });
+
+            ///////////////////////////////////////////////////////////////////////////////////////
+            var menu = new ConsoleMenu(args, level: 0)
+               .Add(">> ENTER TO CRUD FUNCTIONALITIES", () => subMenuCRUD.Show())
+               .Add(">> ENTER TO NONCRUD FUNCTIONALITIES", () => subMenuNonCRUD.Show())
+               .Add("Close", ConsoleMenu.Close)
+               .Add("Exit", () => Environment.Exit(0))
+               .Configure(config =>
+               {
+                   config.Selector = "--> ";
+                   config.EnableFilter = true;
                    config.Title = "Main menu";
                    config.EnableWriteTitle = true;
                    config.EnableBreadcrumb = true;
+                   config.SelectedItemBackgroundColor = ConsoleColor.Yellow;
                });
-            //var menu = new ConsoleMenu(args, level: 0)
-            //   .Add(">> GET ALBUMS", () => GetAlbums())
-            //   .Add("Close", ConsoleMenu.Close)
-            //   .Add("Exit", () => Environment.Exit(0))
-            //   .Configure(config =>
-            //   {
-            //       config.Selector = "--> ";
-            //       config.EnableFilter = true;
-            //       config.Title = "Main menu";
-            //       config.EnableWriteTitle = true;
-            //       config.EnableBreadcrumb = true;
-            //   });
 
-            subMenuArtistNonCRUD.Show();
-            //menu.Show();
-
+            menu.Show();
         }
 
         #region CREATE METHODS
         private static void CreateAlbum()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<CREATING A NEW ALBUM>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::CREATING A NEW ALBUM::");
                 Console.WriteLine("INSERT ALBUM NAME!");
                 string name = Console.ReadLine();
                 Console.WriteLine("INSERT DATE OF RELEASED OF THE ALBUM IN THIS FORMAT (MM/dd/yyyy)!");
@@ -224,6 +263,7 @@ namespace WXZ8SX_HFT_2021221.Client
                     ArtistId = artId,
                     GenreId = genId,
                 }, "album");
+                Console.WriteLine("NEW ALBUM WAS CREATED!");
             }
             catch (FormatException ex)
             {
@@ -237,15 +277,18 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void CreateGenre()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<CREATE GENRE>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::CREATE GENRE::");
                 Console.WriteLine("INSERT GENRE NAME!");
                 string name = Console.ReadLine();
                 rest.Post<Genre>(new Genre()
                 {
                     GenreName = name,
                 }, "genre");
+                Console.WriteLine("NEW GENRE WAS CREATED!");
             }
             catch (FormatException ex)
             {
@@ -259,9 +302,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void CreateArtist()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<CREATE ARTIST>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::CREATE ARTIST::");
                 Console.WriteLine("INSERT ARTIST NAME!");
                 string name = Console.ReadLine();
                 Console.WriteLine("INSERT DATE OF BIRTH OF THE ARTIST! (MM/dd/yyyy)");
@@ -274,6 +319,7 @@ namespace WXZ8SX_HFT_2021221.Client
                     DateOfBirth = date,
                     NumberOfAlbums = num,
                 }, "artist");
+                Console.WriteLine("NEW ARTIST WAS CREATED!");
             }
             catch (FormatException ex)
             {
@@ -287,9 +333,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void CreateSong()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<CREATE SONG>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::CREATE SONG::");
                 Console.WriteLine("INSERT SONG NAME!");
                 string name = Console.ReadLine();
                 Console.WriteLine("INSERT SONG LENGTH!");
@@ -308,6 +356,7 @@ namespace WXZ8SX_HFT_2021221.Client
                     Singer = singer,
                     AlbumId = albumId,
                 }, "song");
+                Console.WriteLine("NEW SONG WAS CREATED!");
             }
             catch (FormatException ex)
             {
@@ -324,9 +373,11 @@ namespace WXZ8SX_HFT_2021221.Client
         #region DELETE METHODS
         private static void DeleteAlbum()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<DELETE ALBUM>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::DELETE ALBUM::");
                 Console.WriteLine("INSERT THE ID OF THE ALBUM TO BE DELETED!");
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine($"THIS ALBUM NAME: {(rest.Get<Album>(id, "album")).AlbumName} WILL BE DELETED!");
@@ -345,9 +396,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void DeleteGenre()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<DELETE GENRE>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::DELETE GENRE::");
                 Console.WriteLine("INSERT THE ID OF THE GENRE TO BE DELETED!");
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine($"THIS GENRE NAME: {(rest.Get<Genre>(id, "genre")).GenreName} WILL BE DELETED!");
@@ -366,9 +419,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void DeleteArtist()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<DELETE ARTIST>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::DELETE ARTIST::");
                 Console.WriteLine("INSERT THE ID OF THE ARTIST TO BE DELETED!");
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine($"THIS ARTIST NAME: {(rest.Get<Artist>(id, "artist")).ArtistName} WILL BE DELETED!");
@@ -387,9 +442,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void DeleteSong()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<DELETE SONG>>\n");
+            Console.ResetColor();
             try
             {
-                Console.WriteLine("::DELETE SONG::");
                 Console.WriteLine("INSERT THE ID OF THE SONG TO BE DELETED!");
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine($"THIS SONG NAME: {(rest.Get<Song>(id, "song")).Name} WILL BE DELETED!");
@@ -411,7 +468,9 @@ namespace WXZ8SX_HFT_2021221.Client
         #region GETALL LIST METHODS
         private static void GetAllAlbums()
         {
-            Console.WriteLine("\n::ALL ALBUMS::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<ALL ALBUMS>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
                 "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
@@ -424,7 +483,7 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                     item.AlbumId, item.AlbumName,
-                    item.ReleasedDate, item.NumberOfSongs, item.Rating,
+                    item.ReleasedDate, item.NumberOfSongs, item.Length ,item.Rating,
                     item.ArtistId, item.GenreId);
             }
             Console.WriteLine(data);
@@ -433,7 +492,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetAllGenres()
         {
-            Console.WriteLine("\n::ALL GENRES::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<ALL GENRES>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-25}", "ID", "Genre Name");
             Console.ResetColor();
@@ -450,7 +511,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetAllArtists()
         {
-            Console.WriteLine("\n::ALL ARTISTS::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<ALL ARTISTS>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20}",
                 "ID", "Artist Name", "Date Of Birth", "Number Of Albums");
@@ -469,9 +532,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetAllSongs()
         {
-            Console.WriteLine("\n::ALL SONGS::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<ALL SONGS>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+            Console.WriteLine("{0,4} {1,-36} {2,-7} {3,-107} {4,-20} {5,-4}",
                 "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
             Console.ResetColor();
 
@@ -479,7 +544,7 @@ namespace WXZ8SX_HFT_2021221.Client
             string data = "";
             foreach (var item in allSongs)
             {
-                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                data += String.Format("{0,4} {1,-36} {2,-7} {3,-107} {4,-20} {5,-4}\n",
                     item.SongId, item.Name, item.Length, item.Writer, item.Singer, item.AlbumId);
             }
             Console.WriteLine(data);
@@ -491,7 +556,9 @@ namespace WXZ8SX_HFT_2021221.Client
         #region GETBYID METHODS
         private static void GetAlbumById()
         {
-            Console.WriteLine("\n::GET ALBUM BY ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALBUM BY ID>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ALBUM ID!");
             int id = int.Parse(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -520,7 +587,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetGenreById()
         {
-            Console.WriteLine("\n::GET GENRE BY ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET GENRE BY ID>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT GENRE ID!");
             int id = int.Parse(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -544,7 +613,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetArtistById()
         {
-            Console.WriteLine("\n::GET ARTIST BY ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ARTIST BY ID>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ARTIST ID!");
             int id = int.Parse(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -570,7 +641,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetSongById()
         {
-            Console.WriteLine("\n::GET SONG BY ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET SONG BY ID>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT SONG ID!");
             int id = int.Parse(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -599,7 +672,9 @@ namespace WXZ8SX_HFT_2021221.Client
         #region UPDATE METHODS
         private static void UpdateAlbum()
         {
-            Console.WriteLine("\n::UPDATE ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<UPDATE ALBUM>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ALBUM ID TO BE UPDATED");
             int id = int.Parse(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -630,12 +705,17 @@ namespace WXZ8SX_HFT_2021221.Client
                 album.GenreId = int.Parse(Console.ReadLine());
                 rest.Put<Album>(album, "album");
 
+                string newData = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}\n",
+                                  album.AlbumId, album.AlbumName,
+                                  album.ReleasedDate, album.NumberOfSongs, album.Rating,
+                                  album.ArtistId, album.GenreId);
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10}",
                     "ID", "Album Name", "Date Of Release", "Number Of Songs", "Rating",
                     "Artist ID", "Genre ID");
                 Console.ResetColor();
-                Console.WriteLine(data);
+                Console.WriteLine("ALBUM WAS UPDATED!");
+                Console.WriteLine(newData);
             }
             catch (InvalidOperationException ex)
             {
@@ -649,7 +729,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void UpdateGenre()
         {
-            Console.WriteLine("\n::UPDATE GENRE::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<UPDATE GENRE>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT GENRE ID TO BE UPDATED");
             try
             {
@@ -685,7 +767,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void UpdateArtist()
         {
-            Console.WriteLine("\n::UPDATE ARTIST::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<UPDATE ARTIST>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ARTIST ID TO BE UPDATED");
             try
             {
@@ -732,7 +816,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void UpdateSong()
         {
-            Console.WriteLine("\n::UPDATE SONG::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<UPDATE SONG>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT SONG ID TO BE UPDATED");
             try
             {
@@ -784,7 +870,9 @@ namespace WXZ8SX_HFT_2021221.Client
         #region NONCRUD ALBUM METHODS
         private static void GetAlbumsByArtistId()
         {
-            Console.WriteLine("\n::ALBUMS BY ARTIST ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<ALBUMS BY ARTIST ID>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ARTIST ID!");
             try
             {
@@ -818,7 +906,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetAlbumsByYear()
         {
-            Console.WriteLine("\n::ALBUMS BY YEAR::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<ALBUMS BY YEAR>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT THE YEAR (yyyy)!");
             try
             {
@@ -835,7 +925,7 @@ namespace WXZ8SX_HFT_2021221.Client
                 {
                     data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                         item.AlbumId, item.AlbumName,
-                        item.ReleasedDate, item.NumberOfSongs, item.Rating,
+                        item.ReleasedDate, item.NumberOfSongs, item.Length, item.Rating,
                         item.ArtistId, item.GenreId);
                 }
                 Console.WriteLine(data);
@@ -854,8 +944,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetBestAlbums()
         {
-            Console.WriteLine("\n::GET BEST ALBUMS::\n");
-
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET BEST ALBUMS>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
                 "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
@@ -868,7 +959,7 @@ namespace WXZ8SX_HFT_2021221.Client
             {
                 data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}\n",
                     item.AlbumId, item.AlbumName,
-                    item.ReleasedDate, item.NumberOfSongs, item.Rating,
+                    item.ReleasedDate, item.NumberOfSongs,item.Length ,item.Rating,
                     item.ArtistId, item.GenreId);
             }
             Console.WriteLine(data);
@@ -877,7 +968,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetTheLongestAlbum()
         {
-            Console.WriteLine("\n::GET THE LONGEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET THE LONGEST ALBUM>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
                 "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
@@ -898,7 +991,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetTheNewestAlbum()
         {
-            Console.WriteLine("\n::GET THE NEWEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET THE NEWEST ALBUM>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
                 "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
@@ -919,7 +1014,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetTheOldestAlbum()
         {
-            Console.WriteLine("\n::GET THE OLDEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET THE OLDEST ALBUM>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
                 "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
@@ -940,7 +1037,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetTheShortestAlbum()
         {
-            Console.WriteLine("\n::GET THE SHORTEST ALBUM::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET THE SHORTEST ALBUM>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-10} {5,-10} {6,-10} {7,-10}",
                 "ID", "Album Name", "Date Of Release", "Number Of Songs", "Length", "Rating",
@@ -964,7 +1063,9 @@ namespace WXZ8SX_HFT_2021221.Client
         #region NONCRUD GENRE METHODS
         private static void GetAllAlbumsWithGenre()
         {
-            Console.WriteLine("\n::GET ALL ALBUMS WITH GENRE::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALL ALBUMS WITH GENRE>>\n");
+            Console.ResetColor();
             try
             {
                 Console.WriteLine("INSERT GENRE ID!");
@@ -1002,7 +1103,9 @@ namespace WXZ8SX_HFT_2021221.Client
         #region NONCRUD ARTIST METHODS
         private static void GetAlbumNameByArtistId()
         {
-            Console.WriteLine("\n::GET ALBUM NAME BY ARTIST ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALBUM NAME BY ARTIST ID>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ARTIST ID!");
             try
             {
@@ -1022,7 +1125,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetAlbumsOfArtist()
         {
-            Console.WriteLine("\n::GET ALBUMS OF ARTIST::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALBUMS OF ARTIST>>\n");
+            Console.ResetColor();
             Console.WriteLine("INSERT ARTIST ID!");
             try
             {
@@ -1056,7 +1161,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetArtistsOrderedByBirthDate()
         {
-            Console.WriteLine("\n::GET ARTISTS ORDERED BY DATE OF BIRTH::");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ARTISTS ORDERED BY DATE OF BIRTH>>\n");
+            Console.ResetColor();
             try
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -1088,7 +1195,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetArtistsOrderedByName()
         {
-            Console.WriteLine("\n::GET ARTISTS ORDERED BY NAME::");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ARTISTS ORDERED BY NAME>>\n");
+            Console.ResetColor();
             try
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -1120,7 +1229,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetArtistsOrderedByNumOfAlbums()
         {
-            Console.WriteLine("\n::GET ARTISTS ORDERED BY NUMBER OF ALBUMS::");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ARTISTS ORDERED BY NUMBER OF ALBUMS>>\n");
+            Console.ResetColor();
             try
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -1155,21 +1266,15 @@ namespace WXZ8SX_HFT_2021221.Client
         #region NONCRUD SONG METHODS
         private static void GetAlbumNameOfSong()
         {
-            Console.WriteLine("\n::GET ALBUM NAME OF SONG BY SONG ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALBUM NAME OF SONG BY SONG ID>>\n");
+            Console.ResetColor();
             try
             {
                 int id = int.Parse(Console.ReadLine());
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
-                    "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
-                Console.ResetColor();
+                string albumName = rest.GetSingle<string>($"statsong/getalbumnameofsong/{id}");
 
-                var song = rest.GetSingle<Song>($"statsong/getalbumnameofsong/{id}");
-                string data = String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
-                        song.SongId, song.Name, song.Length, song.Writer, song.Singer, song.AlbumId);
-
-                Console.WriteLine(data);
-
+                Console.WriteLine($"\nTHE ALBUM NAME RELATED TO SONG ID {id} IS: {albumName}");
             }
             catch (InvalidOperationException ex)
             {
@@ -1183,7 +1288,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetDateOfBirthOfSinger()
         {
-            Console.WriteLine("\n::GET DATE OF BIRTH OF SINGER BY SONG ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET DATE OF BIRTH OF SINGER BY SONG ID>>\n");
+            Console.ResetColor();
             try
             {
                 Console.WriteLine("INSERT SONG ID!");
@@ -1203,7 +1310,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetLongestSong()
         {
-            Console.WriteLine("\n::GET THE LONGEST SONG::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET THE LONGEST SONG>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
                 "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
@@ -1218,7 +1327,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetShortestSong()
         {
-            Console.WriteLine("\n::GET THE SHORTEST SONG::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET THE SHORTEST SONG>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
                 "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
@@ -1233,9 +1344,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetSongsOrderedByLength()
         {
-            Console.WriteLine("\n::GET ALL SONGS ORDERED BY LENGTH::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALL SONGS ORDERED BY LENGTH>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+            Console.WriteLine("{0,4} {1,-36} {2,-7} {3,-107} {4,-20} {5,-4}",
                 "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
             Console.ResetColor();
 
@@ -1243,7 +1356,7 @@ namespace WXZ8SX_HFT_2021221.Client
             string data = "";
             foreach (var item in songs)
             {
-                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                data += String.Format("{0,4} {1,-36} {2,-7} {3,-107} {4,-20} {5,-4}\n",
                     item.SongId, item.Name, item.Length, item.Writer, item.Singer, item.AlbumId);
             }
             Console.WriteLine(data);
@@ -1251,9 +1364,11 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetSongsOrderedByName()
         {
-            Console.WriteLine("\n::GET ALL SONGS ORDERED BY NAME::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET ALL SONGS ORDERED BY NAME>>\n");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}",
+            Console.WriteLine("{0,4} {1,-36} {2,-7} {3,-107} {4,-20} {5,-4}",
                 "ID", "Song Name", "Length", "Writer", "Singer", "Album ID");
             Console.ResetColor();
 
@@ -1261,7 +1376,7 @@ namespace WXZ8SX_HFT_2021221.Client
             string data = "";
             foreach (var item in songs)
             {
-                data += String.Format("{0,4} {1,-20} {2,-25} {3,-20} {4,-20} {5,-20}\n",
+                data += String.Format("{0,4} {1,-36} {2,-7} {3,-107} {4,-20} {5,-4}\n",
                     item.SongId, item.Name, item.Length, item.Writer, item.Singer, item.AlbumId);
             }
             Console.WriteLine(data);
@@ -1269,7 +1384,9 @@ namespace WXZ8SX_HFT_2021221.Client
         }
         private static void GetWriterNameOfSong()
         {
-            Console.WriteLine("\n::GET WRITER NAME OF SONG BY SONG ID::\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\t\t\t<<GET WRITER NAME OF SONG BY SONG ID>>\n");
+            Console.ResetColor();
             try
             {
                 Console.WriteLine("INSERT SONG ID");

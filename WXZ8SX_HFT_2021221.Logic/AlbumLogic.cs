@@ -87,7 +87,7 @@ namespace WXZ8SX_HFT_2021221.Logic
             }
             else
             {
-                foreach (var album in albums)
+                foreach (Album album in albums)
                 {
                     albumsByYear.Add(album);
                 }

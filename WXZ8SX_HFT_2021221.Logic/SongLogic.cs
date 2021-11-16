@@ -10,9 +10,16 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public class SongLogic : ISongLogic
     {
-        protected readonly ISongRepository _songRepository;
-        protected readonly IAlbumRepository _albumRepository;
-        protected readonly IArtistRepository _artistRepository;
+        private readonly ISongRepository _songRepository;
+        private readonly IAlbumRepository _albumRepository;
+        private readonly IArtistRepository _artistRepository;
+
+        public SongLogic(ISongRepository songRepository, IAlbumRepository albumRepository, IArtistRepository artistRepository)
+        {
+            _songRepository = songRepository;
+            _albumRepository = albumRepository;
+            _artistRepository = artistRepository;
+        }
 
         public void CreateSong(Song song)
         {
@@ -42,8 +49,10 @@ namespace WXZ8SX_HFT_2021221.Logic
             {
                 throw new Exception($"There is no such song ID: {songId}!");
             }
-            string albumName = _songRepository.GetAll().FirstOrDefault(song => song.SongId == songId).Album.AlbumName;
+            //string albumName = _songRepository.GetAll().FirstOrDefault(song => song.SongId == songId).Album.AlbumName;
 
+            int albumId = _songRepository.GetAll().FirstOrDefault(song => song.SongId == songId).AlbumId;
+            string albumName = _albumRepository.GetOne(albumId).AlbumName;
             return albumName;
         }
 
