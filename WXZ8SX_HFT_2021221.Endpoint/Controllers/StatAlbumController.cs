@@ -33,6 +33,27 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             return _albumLogic.GetAlbumsByYear(YYYY);
         }
 
+        // GET statalbum/getgenrenameofalbumbysongid/7
+        [HttpGet("{id}")]
+        public string GetGenreNameOfAlbumBySongId(int id)
+        {
+            return _albumLogic.GetGenreNameOfAlbumBySongId(id);
+        }
+
+        // GET statalbum/getartistnameofalbumbysongid/6
+        [HttpGet("{id}")]
+        public string GetArtistNameOfAlbumBySongId(int id)
+        {
+            return _albumLogic.GetArtistNameOfAlbumBySongId(id);
+        }
+
+        // GET statalbum/getlongestsongineachalbum
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, double>> GetLongestSongInEachAlbum()
+        {
+            return _albumLogic.GetLongestSongInEachAlbum();
+        }
+
         // GET statalbum/getbestalbums
         [HttpGet]
         public IEnumerable<Album> GetBestAlbums()

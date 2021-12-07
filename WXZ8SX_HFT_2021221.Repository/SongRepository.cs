@@ -16,7 +16,7 @@ namespace WXZ8SX_HFT_2021221.Repository
 
         public override Song GetOne(int id)
         {
-            return MusicDbContext.Songs.SingleOrDefault(song => song.SongId == id);
+            return MusicDbContext.Songs.FirstOrDefault(song => song.SongId == id);
         }
     }
 }

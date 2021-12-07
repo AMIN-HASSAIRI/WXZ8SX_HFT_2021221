@@ -10,10 +10,10 @@ namespace WXZ8SX_HFT_2021221.Data
 {
     public class MusicDbContext : DbContext
     {
-        public DbSet<Album> Albums { get; set; }
-        public DbSet<Genre> Genres { get; set; }
-        public DbSet<Artist> Artists { get; set; }
-        public DbSet<Song> Songs { get; set; }
+        public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Artist> Artists { get; set; }
+        public virtual DbSet<Song> Songs { get; set; }
 
         public MusicDbContext()
         {
@@ -33,6 +33,24 @@ namespace WXZ8SX_HFT_2021221.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<Album>(entity => entity.HasOne(x => x.Genre)
+            .WithMany(x => x.Albums)
+            .HasForeignKey(x => x.GenreId)
+            .OnDelete(DeleteBehavior.ClientSetNull));
+
+            modelBuilder.Entity<Album>(entity => entity.HasOne(x => x.Artist)
+            .WithMany(x => x.Albums)
+            .HasForeignKey(x => x.ArtistId)
+            .OnDelete(DeleteBehavior.ClientSetNull));
+
+            modelBuilder.Entity<Song>(entity => entity.HasOne(x => x.Album)
+            .WithMany(x => x.Songs)
+            .HasForeignKey(x => x.AlbumId)
+            .OnDelete(DeleteBehavior.ClientSetNull));
+
+
             modelBuilder.Seed();
 
             //modelBuilder.Entity<Artist>().HasData(

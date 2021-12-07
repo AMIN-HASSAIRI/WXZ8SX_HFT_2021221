@@ -17,5 +17,13 @@ namespace WXZ8SX_HFT_2021221.Models
         [Required]
         [MaxLength(100)]
         public string GenreName { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<Album> Albums { get; set; }
+
+        public Genre()
+        {
+            Albums = new HashSet<Album>();
+        }
     }
 }

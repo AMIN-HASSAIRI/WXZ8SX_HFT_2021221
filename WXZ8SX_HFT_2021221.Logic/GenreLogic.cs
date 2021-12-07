@@ -19,6 +19,8 @@ namespace WXZ8SX_HFT_2021221.Logic
             _albumRepository = albumRepository;
         }
 
+        //CRUD
+        #region CRUD
         public void CreateGenre(Genre genre)
         {
             if (_genreRepository.GetOne(genre.GenreId) == null)
@@ -35,37 +37,6 @@ namespace WXZ8SX_HFT_2021221.Logic
                 throw new Exception($"this genre Id {genre.GenreId} is already exists!");
             }
         }
-
-        public IEnumerable<Album> GetAllAlbumsWithGenre(int genreId)
-        {
-            var genre = _genreRepository.GetOne(genreId);
-            if (genre == null)
-            {
-                throw new Exception($"Invalid genre ID: {genreId}");
-            }
-            List<Album> albumsGenre = new List<Album>();
-            var albums = _albumRepository.GetAll().Where(album => album.GenreId == genreId);
-            if (albums.Count() == 0)
-            {
-                throw new Exception("There is no albums with this genre ID!");
-            }
-            foreach (Album al in albums)
-            {
-                albumsGenre.Add(al);
-            }
-            return albumsGenre;
-        }
-
-        public Genre GetGenre(int genreId)
-        {
-            return _genreRepository.GetOne(genreId);
-        }
-
-        public IEnumerable<Genre> GetGenres()
-        {
-            return _genreRepository.GetAll().ToList();
-        }
-
         public void RemoveGenre(int genreId)
         {
             Genre genre = _genreRepository.GetOne(genreId);
@@ -82,6 +53,42 @@ namespace WXZ8SX_HFT_2021221.Logic
 
             _genreRepository.Update(genreToUpdate);
         }
+        public Genre GetGenre(int genreId)
+        {
+            return _genreRepository.GetOne(genreId);
+        }
 
+        public IEnumerable<Genre> GetGenres()
+        {
+            return _genreRepository.GetAll();
+        }
+        #endregion
+
+        //NON-CRUD
+        #region NON-CRUD
+        public IEnumerable<Album> GetAllAlbumsWithGenre(int genreId)
+        {
+            var genre = _genreRepository.GetOne(genreId);
+            if (genre == null)
+            {
+                throw new Exception($"Invalid genre ID: {genreId}");
+            }
+
+            var results = _albumRepository.GetAll().Where(al => al.GenreId == genreId);
+
+            return results;
+        }
+        public IEnumerable<KeyValuePair<string, int>> NumberOfSongsInEachGenre()
+        {
+            var pairs = from x in _albumRepository.GetAll()
+                      group x by x.Genre.GenreName into g
+                      select new KeyValuePair<string, int>
+                      (
+                          g.Key,
+                          g.Sum(s => s.NumberOfSongs)
+                      );
+            return pairs;
+        }
+        #endregion
     }
 }

@@ -10,15 +10,23 @@ namespace WXZ8SX_HFT_2021221.Logic
     public interface ISongLogic
     {
 
-        Song GetSong(int songId);
-
+        //CRUD
         void CreateSong(Song song);
 
         void RemoveSong(int songId);
 
-        string GetWriterNameOfSong(int songId);
+        void UpdateSong(Song song);
 
+        Song GetSong(int songId);
+
+        IEnumerable<Song> GetSongs();
+
+        //NON-CRUD
         DateTime GetDateOfBirthOfSinger(int songId);
+
+        int GetNumberOfAlbumsBySongId(int songId);
+
+        string GetWriterNameOfSong(int songId);
 
         IEnumerable<Song> GetSongsOrderedByLength();
 
@@ -29,10 +37,5 @@ namespace WXZ8SX_HFT_2021221.Logic
         Song GetShortestSong();
 
         string GetAlbumNameOfSong(int songId);
-
-        void UpdateSong(Song song);
-
-        IEnumerable<Song> GetSongs();
-
     }
 }

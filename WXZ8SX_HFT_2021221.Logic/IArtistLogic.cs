@@ -9,25 +9,27 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface IArtistLogic
     {
-        IEnumerable<Artist> GetArtists();
-
-        Artist GetArtist(int artistId);
-
+        //CRUD
         void CreateArtist(Artist artist);
 
         void RemoveArtist(int artistId);
+
+        void UpdateArtist(Artist artist);
+
+        Artist GetArtist(int artistId);
+
+        IEnumerable<Artist> GetArtists();
+
+
+        //NON-CRUD
+        string GetAlbumNameByArtistId(int artistId);
+
+        IEnumerable<Album> GetAlbumsOfArtist(int artistId);
 
         IEnumerable<Artist> GetArtistsOrderedByName();
 
         IEnumerable<Artist> GetArtistsOrderedByBirthDate();
 
         IEnumerable<Artist> GetArtistsOrderedByNumOfAlbums();
-
-        string GetAlbumNameByArtistId(int artistId);
-
-        IEnumerable<Album> GetAlbumsOfArtist(int artistId);
-
-        void UpdateArtist(Artist artist);
-
     }
 }

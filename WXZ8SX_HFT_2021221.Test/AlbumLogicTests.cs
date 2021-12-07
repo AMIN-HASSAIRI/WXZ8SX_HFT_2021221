@@ -22,6 +22,7 @@ namespace WXZ8SX_HFT_2021221.Test
         public void Setup()
         {
             Mock<IAlbumRepository> albumRepoMock = new Mock<IAlbumRepository>();
+            Mock<ISongRepository> songRepoMock = new Mock<ISongRepository>();
 
             //Arrange
             albumRepoMock.Setup(mock => mock.GetOne(It.IsAny<int>()))
@@ -37,7 +38,8 @@ namespace WXZ8SX_HFT_2021221.Test
                       GenreId = 3
                   });
             albumRepoMock.Setup(x => x.GetAll()).Returns(this.FakeAlbumObjects);
-            this.AlbumLogic = new AlbumLogic(albumRepoMock.Object);
+            songRepoMock.Setup(x => x.GetAll()).Returns(this.FakeSongObjects);
+            this.AlbumLogic = new AlbumLogic(albumRepoMock.Object, songRepoMock.Object);
         }
         [Test]
         public void GetOne_AlbumId_Positive_Test()
@@ -109,6 +111,17 @@ namespace WXZ8SX_HFT_2021221.Test
 
             List<Album> albums = new List<Album> { a0, a1, a2, a3, a4 };
             return albums.AsQueryable();
+        }
+        private IQueryable<Song> FakeSongObjects()
+        {
+            Song s0 = new Song() { SongId = 1, Name = "SongTest0" , Length = 0.22, Writer = "WriterTest0", Singer = "Singer0", AlbumId = 1};
+            Song s1 = new Song() { SongId = 2, Name = "SongTest1" , Length = 0.59, Writer = "WriterTest1", Singer = "Singer1", AlbumId = 5};
+            Song s2 = new Song() { SongId = 3, Name = "SongTest2" , Length = 1.92, Writer = "WriterTest2", Singer = "Singer2", AlbumId = 3};
+            Song s3 = new Song() { SongId = 4, Name = "SongTest3" , Length = 2.53, Writer = "WriterTest3", Singer = "Singer3", AlbumId = 2};
+            Song s4 = new Song() { SongId = 5, Name = "SongTest4" , Length = 1.55, Writer = "WriterTest4", Singer = "Singer4", AlbumId = 1};
+
+            List<Song> songs = new List<Song> { s0, s1, s2, s3, s4};
+            return songs.AsQueryable();
         }
     }
 }

@@ -32,8 +32,8 @@ namespace WXZ8SX_HFT_2021221.Models
 
         [NotMapped]
         [JsonIgnore]
-        public Album Album { get; set; }
+        public virtual Album Album { get; set; }
         [ForeignKey(nameof(Album))]
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
     }
 }

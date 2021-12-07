@@ -27,9 +27,9 @@ namespace WXZ8SX_HFT_2021221.Test
             Context = new MusicDbContext(contextBuilder.Options);
 
             Context.Albums.AddRange(
-                new Album { AlbumName = "Test1", ReleasedDate = DateTime.Parse("09/15/2020"), NumberOfSongs = 11, Rating = 4.8, Length = 66.30 },
-                new Album { AlbumName = "Test2", ReleasedDate = DateTime.Parse("12/08/2018"), NumberOfSongs = 13, Rating = 4.9, Length = 55.30 },
-                new Album { AlbumName = "Test3", ReleasedDate = DateTime.Parse("05/29/2021"), NumberOfSongs = 9, Rating = 4.2, Length = 44.30 }
+                new Album { AlbumName = "Test1", ReleasedDate = DateTime.Parse("09/15/2020"), NumberOfSongs = 11, Rating = 4.8, Length = 66.30, ArtistId = 15,GenreId = 3 },
+                new Album { AlbumName = "Test2", ReleasedDate = DateTime.Parse("12/08/2018"), NumberOfSongs = 13, Rating = 4.9, Length = 55.30, ArtistId = 16, GenreId = 2 },
+                new Album { AlbumName = "Test3", ReleasedDate = DateTime.Parse("05/29/2021"), NumberOfSongs = 9, Rating = 4.2, Length = 44.30, ArtistId = 15, GenreId = 5 }
                 );
             Context.SaveChanges();
         }

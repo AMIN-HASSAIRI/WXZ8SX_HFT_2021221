@@ -22,5 +22,13 @@ namespace WXZ8SX_HFT_2021221.Models
         public DateTime DateOfBirth { get; set; }
 
         public int NumberOfAlbums { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<Album> Albums { get; set; }
+
+        public Artist()
+        {
+            Albums = new HashSet<Album>();
+        }
     }
 }

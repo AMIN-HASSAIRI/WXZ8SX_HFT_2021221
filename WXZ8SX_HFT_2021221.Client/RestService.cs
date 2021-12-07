@@ -68,6 +68,17 @@ namespace WXZ8SX_HFT_2021221.Client
             return item;
         }
 
+        public List<KeyValuePair<TKey, TValue>> GetPairs<TKey, TValue>(string endpoint)
+        {
+            List<KeyValuePair<TKey, TValue>> itemList = new List<KeyValuePair<TKey, TValue>>();
+            HttpResponseMessage response = client.GetAsync(endpoint).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                itemList = response.Content.ReadAsAsync<List<KeyValuePair<TKey, TValue>>>().GetAwaiter().GetResult();
+            }
+            return itemList;
+        }
+
         public void Post<T>(T item, string endpoint)
         {
             HttpResponseMessage response =

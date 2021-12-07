@@ -9,16 +9,20 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface IGenreLogic
     {
-        IEnumerable<Genre> GetGenres();
-
-        Genre GetGenre(int genreId);
-
+        //CRUD
         void CreateGenre(Genre genre);
 
         void RemoveGenre(int genreId);
 
+        void UpdateGenre(Genre genre);
+
+        Genre GetGenre(int genreId);
+
+        IEnumerable<Genre> GetGenres();
+
+        //NON-CRUD
         IEnumerable<Album> GetAllAlbumsWithGenre(int genreId);
 
-        void UpdateGenre(Genre genre);
+        IEnumerable<KeyValuePair<string, int>> NumberOfSongsInEachGenre();
     }
 }

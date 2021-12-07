@@ -33,6 +33,13 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
             return _songLogic.GetDateOfBirthOfSinger(id);
         }
 
+        // GET statsong/getnumberofalbumsbysongid/5
+        [HttpGet("{id}")]
+        public int GetNumberOfAlbumsBySongID(int id)
+        {
+            return _songLogic.GetNumberOfAlbumsBySongId(id);
+        }
+
         // GET statsong/getlongestsong
         [HttpGet]
         public Song GetLongestSong()

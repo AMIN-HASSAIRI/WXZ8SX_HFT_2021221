@@ -25,5 +25,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
         {
             return _genreLogic.GetAllAlbumsWithGenre(id);
         }
+
+        // GET statgenre/numberofsongsineachgenre
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, int>> NumberOfSongsInEachGenre()
+        {
+            return _genreLogic.NumberOfSongsInEachGenre();   
+        }
     }
 }

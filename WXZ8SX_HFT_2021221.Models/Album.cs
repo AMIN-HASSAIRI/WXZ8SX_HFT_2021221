@@ -31,16 +31,24 @@ namespace WXZ8SX_HFT_2021221.Models
 
         [NotMapped]
         [JsonIgnore]
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
 
         [ForeignKey(nameof(Artist))]
-        public int ArtistId { get; set; }
+        public int? ArtistId { get; set; }
 
         [NotMapped]
         [JsonIgnore]
-        public Genre Genre { get; set; }
+        public virtual Genre Genre { get; set; }
 
         [ForeignKey(nameof(Genre))]
-        public int GenreId { get; set; }
+        public int? GenreId { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<Song> Songs { get; set; }
+
+        public Album()
+        {
+            Songs = new HashSet<Song>();
+        }
     }
 }

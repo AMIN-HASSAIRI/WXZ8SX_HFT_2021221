@@ -58,7 +58,7 @@ namespace WXZ8SX_HFT_2021221.Test
         [Test]
         public void GetArtist_Negative_Test()
         {
-            Assert.Throws(typeof(Exception), () => this.ArtistLogic.GetArtist(6));
+            Assert.Throws(typeof(FormatException),() => this.ArtistLogic.GetArtist(int.Parse("po")));
         }
         [Test]
         public void RemoveArtist_Negative_Test()

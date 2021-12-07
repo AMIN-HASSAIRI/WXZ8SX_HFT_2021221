@@ -19,6 +19,8 @@ namespace WXZ8SX_HFT_2021221.Logic
             _albumRepository = albumRepository;
         }
 
+        //CRUD
+        #region CRUD
         public void CreateArtist(Artist artist)
         {
             if (_artistRepository.GetOne(artist.ArtistId) == null)
@@ -41,94 +43,6 @@ namespace WXZ8SX_HFT_2021221.Logic
                 throw new Exception($"This artist ID: {artist.ArtistId} is already used!");
             }
         }
-
-        public string GetAlbumNameByArtistId(int artistId)
-        {
-            Artist artist = _artistRepository.GetOne(artistId);
-            if (artist == null)
-            {
-                throw new Exception($"There is no artist ID: {artistId}");
-            }
-            List<Album> allAlbums = _albumRepository.GetAll().ToList();
-            Album album = allAlbums.Where(album => album.AlbumId == artist.ArtistId).SingleOrDefault();
-            return album.AlbumName;
-        }
-
-        public IEnumerable<Album> GetAlbumsOfArtist(int artistId)
-        {
-            Artist artist = _artistRepository.GetOne(artistId);
-            if (artist == null)
-            {
-                throw new Exception($"This artist ID: {artistId} does not exists!");
-            }
-            List<Album> artistAlbums = _albumRepository.GetAll().Where(album => album.ArtistId == artist.ArtistId).ToList();
-            return artistAlbums;
-        }
-
-        public Artist GetArtist(int artistId)
-        {
-            var artistsCount = _artistRepository.GetAll().Count();
-            var artist = _artistRepository.GetOne(artistId);
-            if (artistId > artistsCount)
-            {
-                throw new Exception("This artist ID does not exists!");
-            }
-            else
-            {
-                return artist;
-            }
-        }
-
-        public IEnumerable<Artist> GetArtists()
-        {
-            return _artistRepository.GetAll().ToList();
-        }
-
-        public IEnumerable<Artist> GetArtistsOrderedByBirthDate()
-        {
-            List<Artist> allArtists = _artistRepository.GetAll().ToList();
-
-            List<Artist> orderedArtists = new List<Artist>();
-
-            var artists = allArtists.OrderBy(artist => artist.DateOfBirth);
-
-            foreach (Artist artist in artists)
-            {
-                orderedArtists.Add(artist);
-            }
-            return orderedArtists;
-        }
-
-        public IEnumerable<Artist> GetArtistsOrderedByName()
-        {
-            List<Artist> allArtists = _artistRepository.GetAll().ToList();
-
-            List<Artist> orderedArtists = new List<Artist>();
-
-            var artists = allArtists.OrderBy(artist => artist.ArtistName);
-
-            foreach (Artist artist in artists)
-            {
-                orderedArtists.Add(artist);
-            }
-            return orderedArtists;
-        }
-
-        public IEnumerable<Artist> GetArtistsOrderedByNumOfAlbums()
-        {
-            List<Artist> allArtists = _artistRepository.GetAll().ToList();
-
-            List<Artist> orderedArtists = new List<Artist>();
-
-            var artists = allArtists.OrderBy(artist => artist.NumberOfAlbums);
-
-            foreach (Artist artist in artists)
-            {
-                orderedArtists.Add(artist);
-            }
-            return orderedArtists;
-        }
-
         public void RemoveArtist(int artistId)
         {
             Artist artist = _artistRepository.GetOne(artistId);
@@ -151,6 +65,68 @@ namespace WXZ8SX_HFT_2021221.Logic
 
             _artistRepository.Update(artistToUpdate);
         }
+        public Artist GetArtist(int artistId)
+        {
+            var artist = _artistRepository.GetOne(artistId);
+            if (artist == null)
+            {
+                throw new Exception("This artist ID does not exists!");
+            }
+            else
+            {
+                return artist;
+            }
+        }
+        public IEnumerable<Artist> GetArtists()
+        {
+            return _artistRepository.GetAll();
+        }
+        #endregion
 
+        //NON-CRUD
+        #region NON-CRUD
+        public string GetAlbumNameByArtistId(int artistId)
+        {
+            Artist artist = _artistRepository.GetOne(artistId);
+            if (artist == null)
+            {
+                throw new Exception($"There is no artist ID: {artistId}");
+            }
+            string albumName = _albumRepository.GetAll().FirstOrDefault(album => album.AlbumId == artist.ArtistId).AlbumName;
+            return albumName;
+        }
+
+        public IEnumerable<Album> GetAlbumsOfArtist(int artistId)
+        {
+            Artist artist = _artistRepository.GetOne(artistId);
+            if (artist == null)
+            {
+                throw new Exception($"This artist ID: {artistId} does not exists!");
+            }
+            var artistAlbums = _albumRepository.GetAll().Where(album => album.ArtistId == artist.ArtistId);
+            return artistAlbums;
+        }
+
+        public IEnumerable<Artist> GetArtistsOrderedByBirthDate()
+        {
+            var artists = _artistRepository.GetAll().OrderBy(artist => artist.DateOfBirth);
+
+            return artists;
+        }
+
+        public IEnumerable<Artist> GetArtistsOrderedByName()
+        {
+            var artists = _artistRepository.GetAll().OrderBy(artist => artist.ArtistName);
+
+            return artists;
+        }
+
+        public IEnumerable<Artist> GetArtistsOrderedByNumOfAlbums()
+        {
+            var artists = _artistRepository.GetAll().OrderBy(artist => artist.NumberOfAlbums);
+
+            return artists;
+        }
+        #endregion
     }
 }

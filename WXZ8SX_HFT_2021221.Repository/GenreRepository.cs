@@ -16,7 +16,7 @@ namespace WXZ8SX_HFT_2021221.Repository
 
         public override Genre GetOne(int id)
         {
-            return MusicDbContext.Genres.SingleOrDefault(genre => genre.GenreId == id);
+            return MusicDbContext.Genres.FirstOrDefault(genre => genre.GenreId == id);
         }
     }
 }

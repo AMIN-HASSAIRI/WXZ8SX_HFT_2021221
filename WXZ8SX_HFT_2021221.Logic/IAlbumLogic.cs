@@ -9,17 +9,26 @@ namespace WXZ8SX_HFT_2021221.Logic
 {
     public interface IAlbumLogic
     {
-        IEnumerable<Album> GetAlbums();
 
-        Album GetAlbum(int id);
-
+        //CRUD
         void CreateAlbum(Album album);
 
         void RemoveAlbum(int albumId);
 
-        Album GetTheOldestAlbum();
+        void UpdateAlbum(Album album);
 
-        Album GetTheNewestAlbum();
+        Album GetAlbum(int id);
+
+        IEnumerable<Album> GetAlbums();
+
+        //NON-CRUD
+        IEnumerable<KeyValuePair<string, double>> GetLongestSongInEachAlbum();
+
+        string GetGenreNameOfAlbumBySongId(int songId);
+
+        string GetArtistNameOfAlbumBySongId(int songId);
+
+        IEnumerable<Album> GetAlbumsByArtist(int artistId);
 
         IEnumerable<Album> GetBestAlbums();
 
@@ -29,8 +38,8 @@ namespace WXZ8SX_HFT_2021221.Logic
 
         Album GetTheShortestAlbum();
 
-        IEnumerable<Album> GetAlbumsByArtist(int artistId);
+        Album GetTheOldestAlbum();
 
-        void UpdateAlbum(Album album);
+        Album GetTheNewestAlbum();
     }
 }
