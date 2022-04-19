@@ -4,9 +4,63 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient"
+        xmlns:ViewModels="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="AlbumsWindow" Height="450" Width="800">
+        Title="AlbumsWindow" Height="720" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Albums}" SelectedItem="{Binding SelectedAlbum}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding AlbumId}"></Label>
+                            <Label Grid.Column="1" Content="{Binding AlbumName}"></Label>
+                            <Label Grid.Column="2" Content="{Binding ReleasedDate}"></Label>
+                            <Label Grid.Column="3" Content="{Binding NumberOfSongs}"></Label>
+                            <Label Grid.Column="4" Content="{Binding Rating}"></Label>
+                            <Label Grid.Column="5" Content="{Binding Length}"></Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" Grid.RowSpan="2">
+            <Label Content="Album Name" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.AlbumName}" Margin="10"></TextBox>
+            <Label Content="Released Date" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.ReleasedDate}" Margin="10"></TextBox>
+            <Label Content="Number Of Songs" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.NumberOfSongs}" Margin="10"></TextBox>
+            <Label Content="Rating" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.Rating}" Margin="10"></TextBox>
+            <Label Content="Length" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.Length}" Margin="10"></TextBox>
+            <Label Content="Artist ID" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.ArtistId}" Margin="10"></TextBox>
+            <Label Content="Genre ID" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.GenreId}" Margin="10"></TextBox>
+
+            <Button Command="{Binding AddAlbumCommand}" Content="Add Album" Margin="10"></Button>
+            <Button Command="{Binding EditAlbumCommand}" Content="Edit Album" Margin="10"></Button>
+            <Button Command="{Binding DeleteAlbumCommand}" Content="Delete Album" Margin="10"></Button>
+        </StackPanel>
     </Grid>
 </Window>
