@@ -7,6 +7,9 @@
         xmlns:ViewModels="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
         Title="AlbumsNonCrudWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <ViewModels:AlbumsNonCrudWindowViewModel></ViewModels:AlbumsNonCrudWindowViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
