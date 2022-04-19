@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:WpfClient"
         xmlns:ViewModels="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="SongsWindow" Height="450" Width="800">
+        Title="SongsWindow" Height="550" Width="800">
+    <Window.DataContext>
+        <ViewModels:SongsWindowViewModel></ViewModels:SongsWindowViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
