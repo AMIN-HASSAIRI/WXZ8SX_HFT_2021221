@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
     public class AlbumController : ControllerBase
     {
         IAlbumLogic _albumLogic;
+        //IHubContext<SignalRHub> hub;
 
         public AlbumController(IAlbumLogic albumLogic)
         {
