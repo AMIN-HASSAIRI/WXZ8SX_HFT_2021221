@@ -4,9 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient"
+        xmlns:ViewModels="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Command="{Binding ManageAlbumsCommand}" Content="Manage CRUD Albums" Margin="15" Grid.Column="0" Grid.Row="0" Background="BlanchedAlmond"></Button>
+        <Button Command="{Binding ManageNonCrudAlbumsCommand}" Content="Manage Non CRUD Albums" Margin="15" Grid.Column="0" Grid.Row="1" Background="BlanchedAlmond"></Button>
+
+        <Button Command="{Binding ManageGenreCommand}" Content="Manage CRUD Genre" Margin="15" Grid.Column="0" Grid.Row="2" Background="LightGreen"></Button>
+        <Button Command="{Binding ManageNonCrudGenreCommand}" Content="Manage Non CRUD Genre" Margin="15" Grid.Column="0" Grid.Row="3" Background="LightGreen"></Button>
+
+        <Button Command="{Binding ManageArtistsCommand}" Content="Manage CRUD Artists" Margin="15" Grid.Column="1" Grid.Row="0" Background="Honeydew"></Button>
+        <Button Command="{Binding ManageNonCrudArtistsCommand}" Content="Manage Non CRUD Artists" Margin="15" Grid.Column="1" Grid.Row="1" Background="Honeydew"></Button>
+
+        <Button Command="{Binding ManageSongsCommand}" Content="Manage CRUD Songs" Margin="15" Grid.Column="1" Grid.Row="2" Background="LightBlue"></Button>
+        <Button Command="{Binding ManageNonCrudSongsCommand}" Content="Manage Non CRUD Songs" Margin="15" Grid.Column="1" Grid.Row="3" Background="LightBlue"></Button>
 
     </Grid>
 </Window>
