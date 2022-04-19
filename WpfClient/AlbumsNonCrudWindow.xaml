@@ -1,0 +1,152 @@
+﻿<Window x:Class="WpfClient.AlbumsNonCrudWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfClient"
+        xmlns:ViewModels="clr-namespace:WpfClient.ViewModels"
+        mc:Ignorable="d"
+        Title="AlbumsNonCrudWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Albums}" SelectedItem="{Binding SelectedAlbum}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding AlbumId}"></Label>
+                            <Label Grid.Column="1" Content="{Binding AlbumName}"></Label>
+                            <Label Grid.Column="2" Content="{Binding ReleasedDate}"></Label>
+                            <Label Grid.Column="3" Content="{Binding NumberOfSongs}"></Label>
+                            <Label Grid.Column="4" Content="{Binding Rating}"></Label>
+                            <Label Grid.Column="5" Content="{Binding Length}"></Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding ArtistId}"></Label>
+                            <Label Grid.Column="1" Content="{Binding ArtistName}"></Label>
+                            <Label Grid.Column="2" Content="{Binding DateOfBirth}"></Label>
+                            <Label Grid.Column="3" Content="{Binding NumberOfAlbums}"></Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" Grid.RowSpan="6">
+            <Label Content="Get Albums By Artist ID" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedArtist.ArtistId}" Margin="10"></TextBox>
+
+            <Label Content="Get Albums By Year" Background="AliceBlue" Margin="10"/>
+            <TextBox Text="{Binding SelectedAlbum.ReleasedDate.Year, Mode=OneWay}" Margin="10"></TextBox>
+
+            <Button Command="{Binding GetAlbumsByArtistCommand}" Content="Get Albums By Artist ID" Margin="10"></Button>
+            <Button Command="{Binding GetAlbumsByYearCommand}" Content="Get Albums By Year" Margin="10"></Button>
+            <Button Command="{Binding GetLongestSongInEachAlbumCommand}" Content="Get Longest Song In Each Album" Margin="10"></Button>
+            <Button Command="{Binding GetBestAlbumsCommand}" Content="Get Best Albums" Margin="10"></Button>
+            <Button Command="{Binding GetGenreNameOfAlbumBySongIdCommand}" Content="Get Genre Name Of Album By Song Id" Margin="10"></Button>
+        </StackPanel>
+
+        <ListBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding GetAlbumsByArtist}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding AlbumName}" Grid.Column="0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding GetAlbumsByYear}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding AlbumName}" Grid.Column="0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Grid.Row="4" Grid.Column="0" ItemsSource="{Binding GetLongestSongInEachAlbum}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Key}" Grid.Column="0"/>
+                        <Label Content="{Binding Value}" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Grid.Row="5" Grid.Column="0" ItemsSource="{Binding GetBestAlbums}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding AlbumName}" Grid.Column="0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Grid.Row="6" Grid.Column="0" ItemsSource="{Binding GetGenreNameOfAlbumBySongId}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding GenreName}" Grid.Column="0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
