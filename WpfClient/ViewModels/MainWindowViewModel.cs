@@ -22,7 +22,51 @@ namespace WpfClient.ViewModels
 
         public MainWindowViewModel()
         {
+            ManageAlbumsCommand = new RelayCommand(OpenAlbumsWindow);
+            ManageArtistsCommand = new RelayCommand(OpenArtistsWindow);
+            ManageGenreCommand = new RelayCommand(OpenGenreWindow);
+            ManageSongsCommand = new RelayCommand(OpenSongWindow);
 
+
+            ManageNonCrudAlbumsCommand = new RelayCommand(OpenNonCrudAlbumsWindow);
+            ManageNonCrudArtistsCommand = new RelayCommand(OpenNonCrudArtistsWindow);
+            ManageNonCrudGenreCommand = new RelayCommand(OpenNonCrudGenreWindow);
+            ManageNonCrudSongsCommand = new RelayCommand(OpenNonCrudSongsWindow);
+        }
+
+        private void OpenAlbumsWindow()
+        {
+            new AlbumsWindow().Show();
+        }
+        private void OpenArtistsWindow()
+        {
+            new ArtistsWindow().Show();
+        }
+        private void OpenGenreWindow()
+        {
+            new GenreWindow().Show();
+        }
+        private void OpenSongWindow()
+        {
+            new SongsWindow().Show();
+        }
+
+
+        private void OpenNonCrudAlbumsWindow()
+        {
+            new AlbumsNonCrudWindow().Show();
+        }
+        private void OpenNonCrudArtistsWindow()
+        {
+            new ArtistsNonCrudWindow().Show();
+        }
+        private void OpenNonCrudGenreWindow()
+        {
+            new GenreNonCrudWindow().Show();
+        }
+        private void OpenNonCrudSongsWindow()
+        {
+            new SongsNonCrudWindow().Show();
         }
     }
 }
