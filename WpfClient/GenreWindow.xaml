@@ -7,6 +7,9 @@
         xmlns:ViewModels="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
         Title="GenreWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <ViewModels:GenreWindowViewModel></ViewModels:GenreWindowViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
