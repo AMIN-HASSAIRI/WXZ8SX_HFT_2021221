@@ -44,7 +44,7 @@ namespace WXZ8SX_HFT_2021221.Endpoint
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MusicDbApp.Endpoint", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MusicDbApplication.Endpoint", Version = "v1" });
             });
             //
         }
@@ -55,6 +55,11 @@ namespace WXZ8SX_HFT_2021221.Endpoint
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //new
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WXZ8SX_HFT_2021221.Endpoint v1"));
+                //
             }
 
             //new
