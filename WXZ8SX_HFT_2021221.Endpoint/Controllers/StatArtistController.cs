@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WXZ8SX_HFT_2021221.Endpoint.Services;
 using WXZ8SX_HFT_2021221.Logic;
 using WXZ8SX_HFT_2021221.Models;
 
@@ -13,10 +15,12 @@ namespace WXZ8SX_HFT_2021221.Endpoint.Controllers
     public class StatArtistController : ControllerBase
     {
         IArtistLogic _artistLogic;
+        IHubContext<SignalRHub> hub;
 
-        public StatArtistController(IArtistLogic artistLogic)
+        public StatArtistController(IArtistLogic artistLogic, IHubContext<SignalRHub> hub)
         {
             _artistLogic = artistLogic;
+            this.hub = hub;
         }
 
         // GET statartist/getalbumnamebyartistid/4
