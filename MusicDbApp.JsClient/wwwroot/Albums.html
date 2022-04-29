@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Albums UI</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Album Catalogue</h1>
+
+    <div id="formdiv">
+        <label>Album Name</label>
+        <input type="text" id="_albumname" />
+        <label>Date Released</label>
+        <input type="text" id="_datereleased" />  <!--This format(1995-03-30T00:00:00)-->
+        <label>Number Of Songs</label>
+        <input type="text" id="_numberofsongs" />
+        <label>Rating</label>
+        <input type="text" id="_rating" />
+        <label>Artist ID</label>
+        <input type="text" id="_artistid" />
+        <label>Genre ID</label>
+        <input type="text" id="_genreid" />
+        <button type="button" onclick="create()">Add Album</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date Released</th>
+                <th>Nomber Of Songs</th>
+                <th>Rating</th>
+                <th>Artist ID</th>
+                <th>Genre ID</th>
+                <th>Delete Album</th>
+                <th>Update Album</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+
+
+
+    <script src="AlbumsScript.js"></script>
+</body>
+</html>
