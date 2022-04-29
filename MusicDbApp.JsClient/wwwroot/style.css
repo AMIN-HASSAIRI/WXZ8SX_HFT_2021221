@@ -1,0 +1,35 @@
+﻿* {
+    font-size: 1.05em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+tr, td {
+    padding: 5px;
+}
+
+th {
+    background-color: aqua;
+}
+
+#formdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#formdiv label, button, input {
+    margin: 5px;
+    padding: 2px;
+}
+
+#formdiv label {
+    font-weight: bolder;
+}
