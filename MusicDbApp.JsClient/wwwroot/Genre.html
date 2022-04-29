@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Genre UI</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Genre Catalogue</h1>
+
+    <div id="formdiv">
+        <label>Genre Name</label>
+        <input type="text" id="_genrename" />
+        <button type="button" onclick="create()">Add Genre</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Genre Name</th>
+                <th>Delete Genre</th>
+                <th>Update Genre</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+
+
+
+    <script src="GenreScript.js"></script>
+</body>
+</html>
