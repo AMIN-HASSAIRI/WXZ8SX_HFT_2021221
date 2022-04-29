@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Song UI</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Song Catalogue</h1>
+
+    <div id="formdiv">
+        <label>Song Name</label>
+        <input type="text" id="_songname" />
+        <label>Song Length</label>
+        <input type="text" id="_songlength" />
+        <label>Song Writer</label>
+        <input type="text" id="_songwriter" />
+        <label>Song Singer</label>
+        <input type="text" id="_songsinger" />
+        <label>Album ID</label>
+        <input type="text" id="_albumid" />
+        <button type="button" onclick="create()">Add Song</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Song Name</th>
+                <th>Song Length</th>
+                <th>Song Writer</th>
+                <th>Song Singer</th>
+                <th>Album ID</th>
+                <th>Delete Song</th>
+                <th>Update Song</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+
+
+
+    <script src="SongsScript.js"></script>
+</body>
+</html>
