@@ -73,6 +73,15 @@ namespace WXZ8SX_HFT_2021221.Endpoint
             }));
             //
 
+            //JS
+            app.UseCors(x => x
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:12307")
+            );
+            //
+
             app.UseRouting();
 
             //new
